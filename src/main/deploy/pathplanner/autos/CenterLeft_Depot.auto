@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CenterL_Start"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CenterL_DepotIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CenterL_Shoot2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CenterL_Hang"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

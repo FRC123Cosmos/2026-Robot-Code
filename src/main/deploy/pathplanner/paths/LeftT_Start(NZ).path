@@ -1,0 +1,115 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.0000868515623145,
+        "y": 7.437849994292204
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.253003720359224,
+        "y": 7.509838415870577
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.816448717948918,
+        "y": 7.197871794880313
+      },
+      "prevControl": {
+        "x": 5.533605690000563,
+        "y": 7.470856334681072
+      },
+      "nextControl": {
+        "x": 6.131598277941717,
+        "y": 6.893706766570849
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.490884615383367,
+        "y": 6.174589743584655
+      },
+      "prevControl": {
+        "x": 5.813479867046003,
+        "y": 6.711038946714805
+      },
+      "nextControl": {
+        "x": 6.710151497426243,
+        "y": 6.000948291508277
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.595564102562854,
+        "y": 5.721089743584655
+      },
+      "prevControl": {
+        "x": 7.311955948633747,
+        "y": 5.921333408634733
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "LeftT_Start(NZ)"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": -39.842203279375326
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 1.5,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "Left",
+  "idealStartingState": {
+    "velocity": 0.5,
+    "rotation": -80.0
+  },
+  "useDefaultConstraints": true
+}
