@@ -1,20 +1,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class AgitateIntakeCommand extends Command{
+public class OscillateIntakeCommand extends Command{
 
     private IntakeSubsystem intakeSubsystem;
 
-    private final double highPos = 2 * (IntakeConstants.kIntakeFinalPosition - 12) / 3;
-    private final double lowPos = IntakeConstants.kIntakeFinalPosition - 12;
+    private final double highPos = 75;
+    private final double lowPos = 120;
 
     private boolean goingHigh = true;
     private boolean wasAtTargetPos = false;
 
-    public AgitateIntakeCommand(IntakeSubsystem intakeSubsystem) {
+    public OscillateIntakeCommand(IntakeSubsystem intakeSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
         addRequirements(intakeSubsystem);
     }
@@ -28,7 +27,8 @@ public class AgitateIntakeCommand extends Command{
 
     @Override
     public void execute() {
-        boolean atTargetPos = intakeSubsystem.intakeAtPosition();
+        boolean atTargetPos = Math.abs(
+            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 20;
 
         if (atTargetPos && !wasAtTargetPos) {
             goingHigh = !goingHigh;
@@ -45,6 +45,7 @@ public class AgitateIntakeCommand extends Command{
 
     @Override
     public void end(boolean canceled) {
+        intakeSubsystem.setIntakePosition(100);
     }
 
     @Override

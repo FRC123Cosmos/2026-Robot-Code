@@ -6,7 +6,7 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class PulseAndShootCommand extends Command{
+public class AgitatedPulseAndShootCommand extends Command{
 
     private ShooterSubsystem shooterSubsystem;
     private IntakeSubsystem intakeSubsystem;
@@ -17,17 +17,19 @@ public class PulseAndShootCommand extends Command{
     private final double pulseDuration = 0.4;
     private final double restDuration = 0.1;
 
+    private final double intakeHighPos = 35;
+    private final double intakeLowPos = 130;
+
     private final Timer timer = new Timer();
 
     private boolean isPulsing = true;
     private double lastSpeed = Double.NaN;
 
-    private boolean agitateHigh = false;
-    private boolean wasAtPosition = false;
-    private double IntakeTargetPos = IntakeConstants.kIntakeFinalPosition - 12;
+    private boolean goingHigh = true;
+    private boolean wasAtTargetPos = false;
 
     
-    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, boolean stowIntake) {
+    public AgitatedPulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, boolean stowIntake) {
         this.shooterSubsystem = shooterSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.shootSpeed = shootSpeed;
@@ -43,6 +45,11 @@ public class PulseAndShootCommand extends Command{
         timer.start();
 
         isPulsing = true;
+
+        goingHigh = true;
+        wasAtTargetPos = false;
+        intakeSubsystem.setIntakePosition(intakeHighPos);
+
         intakeSubsystem.setIntakeRoller(IntakeConstants.intakeRollerAgitationSpeed);
         intakeSubsystem.setIndexer(pulseDutyCycle);
         shooterSubsystem.setShooterVelocity(shootSpeed);
@@ -53,17 +60,24 @@ public class PulseAndShootCommand extends Command{
         double elapsedTime = timer.get();
         double speed;
 
-        shooterSubsystem.kickFuel(true);
-        
-        boolean atPos = intakeSubsystem.intakeAtPosition();
+        boolean atTargetPos = Math.abs(
+            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 30;
 
-        if (atPos && !wasAtPosition) {
-            IntakeTargetPos = getNextAgitatePosition();
-            intakeSubsystem.setIntakePosition(IntakeTargetPos);
+        shooterSubsystem.kickFuel(true);
+
+
+        if (atTargetPos && !wasAtTargetPos) {
+            goingHigh = !goingHigh;
+
+            if (goingHigh){
+                intakeSubsystem.setIntakePosition(intakeHighPos);
+            } else {
+                intakeSubsystem.setIntakePosition(intakeLowPos);
+            }
         }
 
-        wasAtPosition = atPos;
-
+        wasAtTargetPos = atTargetPos;
+        
         if (isPulsing && elapsedTime >= pulseDuration) {
             speed = 0.0;
             isPulsing = false;
@@ -85,19 +99,16 @@ public class PulseAndShootCommand extends Command{
     @Override
     public void end(boolean canceled) {
         shooterSubsystem.stopShooterSystem();
+        
         intakeSubsystem.setIndexer(0.0);
         intakeSubsystem.setIntakeRoller(0.0);
         timer.stop();
+
         if (stow) {
-            intakeSubsystem.setIntakePosition(5);
+            intakeSubsystem.setIntakePosition(10);
+        } else {
+            intakeSubsystem.setIntakePosition(100);
         }
     }
 
-    private double getNextAgitatePosition() {
-        agitateHigh = !agitateHigh;
-
-        return agitateHigh
-            ? IntakeConstants.kIntakeFinalPosition - 12
-            : ((IntakeConstants.kIntakeFinalPosition - 12) / 2) - 5;
-    }
 }

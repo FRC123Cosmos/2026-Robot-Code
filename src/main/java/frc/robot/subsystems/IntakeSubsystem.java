@@ -63,6 +63,10 @@ public class IntakeSubsystem extends SubsystemBase{
         return intakeEncoder.getPosition();
     }
 
+    public double getTargetPosition(){
+        return targetPosition;
+    }
+
     public void setIntakePosition(double position){
         targetPosition = position;
     }

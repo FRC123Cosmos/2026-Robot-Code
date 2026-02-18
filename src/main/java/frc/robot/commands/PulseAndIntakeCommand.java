@@ -7,7 +7,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class PulseAndIntakeCommand extends Command{
     private IntakeSubsystem intakeSubsystem;
-    private double targetPosition = IntakeConstants.kIntakeFinalPosition - 12;
+    private double targetPosition = IntakeConstants.kIntakeFinalPosition - 7;
 
     private final double pulseDutyCycle = 0.8;
     private final double pulseDuration = 0.4;

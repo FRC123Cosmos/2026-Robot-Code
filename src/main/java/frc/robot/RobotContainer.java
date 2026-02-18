@@ -8,13 +8,14 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.AgitateIntakeCommand;
+import frc.robot.commands.AgitatedPulseAndShootCommand;
 import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.OscillateIntakeCommand;
 import frc.robot.commands.PulseAndIntakeCommand;
-import frc.robot.commands.PulseAndShootCommand;
 import frc.robot.commands.PulseIndexerCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.WinchSubsystem;
@@ -25,7 +26,8 @@ public class RobotContainer {
   // private final VisionSubsystem vision = new VisionSubsystem();
   private final IntakeSubsystem intake = new  IntakeSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
-  private final WinchSubsystem winch = new WinchSubsystem();
+  // private final WinchSubsystem winch = new WinchSubsystem();
+  private final HoodSubsystem hood = new HoodSubsystem();
 
 
   private final CommandXboxController driverControllerCommand =
@@ -75,8 +77,12 @@ public class RobotContainer {
     //   new ParallelCommandGroup(
     //     new PulseAndShootCommand(shooter, intake, 3000, false),
     //     new AgitateIntakeCommand(intake)));
+
+    coPilotControllerCommand.rightBumper().whileTrue(new OscillateIntakeCommand(intake));
+
     coPilotControllerCommand.rightTrigger().whileTrue(
-      new PulseAndShootCommand(shooter, intake, 3000, false));
+      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true));
+
     // coPilotControllerCommand.rightTrigger().whileTrue(new ShootCommand(shooter, intake, 3000, false));
     // controllerOne.leftBumper().whileTrue(new IntakeCommand(intake, false));
     // controllerOne.rightBumper().whileTrue(new ParallelCommandGroup(

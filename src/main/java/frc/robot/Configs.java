@@ -7,6 +7,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import frc.robot.Constants.HoodConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -190,6 +191,31 @@ public final class Configs {
                         .follow(WinchConstants.kWinchCANID, true)
                         .smartCurrentLimit(40)
                         .voltageCompensation(12);
+                }
+        }
+
+        public static final class HoodConfigs {
+        
+                public static final SparkMaxConfig hoodConfig = new SparkMaxConfig();
+
+                static {
+                        hoodConfig
+                        .idleMode(IdleMode.kCoast)
+                        .smartCurrentLimit(20)
+                        .voltageCompensation(12);
+                        hoodConfig.encoder
+                        .positionConversionFactor(2.67 / HoodConstants.kHoodGearReduction)
+                        .velocityConversionFactor((2.67 / HoodConstants.kHoodGearReduction)/60);
+                        hoodConfig.softLimit
+                        .forwardSoftLimit(HoodConstants.kHoodFinalPosition)
+                        .forwardSoftLimitEnabled(false)
+                        .reverseSoftLimit(HoodConstants.kHoodInitialPosition)
+                        .reverseSoftLimitEnabled(false);
+                        hoodConfig.closedLoop
+                        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                        .pid(.05, 0, 0)
+                        .iZone(0.1)
+                        .outputRange(-0.4, 0.4);
                 }
         }
 }
