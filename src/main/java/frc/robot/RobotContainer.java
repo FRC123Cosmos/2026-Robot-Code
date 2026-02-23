@@ -1,32 +1,38 @@
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.events.EventTrigger;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AgitatedPulseAndShootCommand;
+import frc.robot.commands.AlignAndFaceTagCommand;
 import frc.robot.commands.DefaultDriveCommand;
-import frc.robot.commands.OscillateIntakeCommand;
-import frc.robot.commands.PulseAndIntakeCommand;
-import frc.robot.commands.PulseIndexerCommand;
-import frc.robot.commands.ShootCommand;
+import frc.robot.commands.FaceTagCommand;
+import frc.robot.commands.OscillatedPulseAndIntakeCommand;
+import frc.robot.commands.PulseAndShootCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.WinchSubsystem;
 
 public class RobotContainer {
 
   private final DriveSubsystem robotDrive = new DriveSubsystem();
-  // private final VisionSubsystem vision = new VisionSubsystem();
+  private final VisionSubsystem vision = new VisionSubsystem();
   private final IntakeSubsystem intake = new  IntakeSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
-  // private final WinchSubsystem winch = new WinchSubsystem();
+  private final WinchSubsystem winch = new WinchSubsystem();
   private final HoodSubsystem hood = new HoodSubsystem();
 
 
@@ -36,7 +42,7 @@ public class RobotContainer {
   private final CommandXboxController coPilotControllerCommand = 
     new CommandXboxController(OIConstants.kCoPilotControllerPort);
 
-  // private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
 
   private final SendableChooser<AutoPos> autoPosition;
 
@@ -44,17 +50,35 @@ public class RobotContainer {
 
   
   public RobotContainer() {
+
+    /* ---------------------------------------------PathPlanner Commands---------------------------------------- */
+
+    NamedCommands.registerCommand("OscillateIntake", new OscillatedPulseAndIntakeCommand(intake));
+    NamedCommands.registerCommand("Shoot", new PulseAndShootCommand(shooter, intake, 3000));
+    NamedCommands.registerCommand("AgitatedShoot", 
+      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true));
+    NamedCommands.registerCommand("lowerWinch", new InstantCommand(() -> winch.setWinchPos(0.0)));
+
+    /* ----------------------------------------------PathPlanner Events----------------------------------------- */
+
+    new EventTrigger("raiseWinch").onTrue(new InstantCommand(() -> winch.setWinchPos(5)));
+    new EventTrigger("intakeOut").onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    new EventTrigger("intakeIn").onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+
+    /* -------------------------------------------End of PathPlanner Block--------------------------------------- */
+
     configureBindings();
 
     autoPosition = new SendableChooser<AutoPos>();
-    autoPosition.addOption("Left", AutoPos.Left);
-    autoPosition.addOption("Center", AutoPos.Center);
-    autoPosition.addOption("Right", AutoPos.Right);
-    autoPosition.setDefaultOption("Center", AutoPos.Center);
+    autoPosition.addOption("Left(Trench)", AutoPos.LeftT_NZ);
+    autoPosition.addOption("Center Left", AutoPos.CenterL);
+    autoPosition.addOption("Center Right", AutoPos.CenterR);
+    autoPosition.addOption("Right(Trench)", AutoPos.RightT_NZ);
+    autoPosition.setDefaultOption("Center Left", AutoPos.CenterL);
     SmartDashboard.putData("Auto Pos", autoPosition);
 
-    // autoChooser = AutoBuilder.buildAutoChooser("Example_Auto");
-    // SmartDashboard.putData("Auto Mode", autoChooser);
+    autoChooser = AutoBuilder.buildAutoChooser("Test_Auto");
+    SmartDashboard.putData("Auto Mode", autoChooser);
     SmartDashboard.putNumber("Auto Delay", 0);
 
   }
@@ -64,24 +88,30 @@ public class RobotContainer {
     // -------------------------------- Driver Controller Binding ----------------------------------- //
     robotDrive.setDefaultCommand(new DefaultDriveCommand(robotDrive));
 
+    driverControllerCommand.a().whileTrue(new FaceTagCommand(robotDrive, vision, 0.0));
     // driverControllerCommand.a().whileTrue(new AlignToTagCommand(robotDrive, vision));
     driverControllerCommand.y().whileTrue(new RunCommand(() -> robotDrive.setX()));
     driverControllerCommand.start().onTrue(new InstantCommand(() -> robotDrive.zeroHeading(), robotDrive));
 
     // -------------------------------- CoPilot Controller Binding ----------------------------------- //
-    coPilotControllerCommand.leftTrigger().whileTrue(new PulseAndIntakeCommand(intake));
+    coPilotControllerCommand.leftTrigger().whileTrue(new OscillatedPulseAndIntakeCommand(intake));
     coPilotControllerCommand.leftBumper().whileTrue( new StartEndCommand(
       () -> intake.setIndexer(-0.3), 
       () -> intake.setIndexer(0.0)));
+
+    coPilotControllerCommand.rightBumper().whileTrue(
+      new AgitatedPulseAndShootCommand(shooter, intake, 2700, true));
+
+
     // coPilotControllerCommand.rightBumper().whileTrue(
-    //   new ParallelCommandGroup(
-    //     new PulseAndShootCommand(shooter, intake, 3000, false),
-    //     new AgitateIntakeCommand(intake)));
-
-    coPilotControllerCommand.rightBumper().whileTrue(new OscillateIntakeCommand(intake));
-
+    //   new PulseAndShootCommand(shooter, intake, 3500));
     coPilotControllerCommand.rightTrigger().whileTrue(
       new AgitatedPulseAndShootCommand(shooter, intake, 3000, true));
+
+
+    coPilotControllerCommand.povUp().onTrue(new InstantCommand(() -> winch.setWinchPos(5)));
+    coPilotControllerCommand.povDown().onTrue(new InstantCommand(() -> winch.setWinchPos(0.0)));
+
 
     // coPilotControllerCommand.rightTrigger().whileTrue(new ShootCommand(shooter, intake, 3000, false));
     // controllerOne.leftBumper().whileTrue(new IntakeCommand(intake, false));
@@ -90,9 +120,13 @@ public class RobotContainer {
     //     new InstantCommand(() -> shooter.setShooterVelocity(ShooterConstants.kTestShooterVelocityRPM)), 
     //     new RunCommand(() -> shooter.kickFuel(true), shooter)
     //   ));
-    coPilotControllerCommand.a().onTrue(new InstantCommand(() -> intake.setIntakePosition(45)));
-    coPilotControllerCommand.b().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
-    coPilotControllerCommand.y().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+
+    coPilotControllerCommand.start().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+
+    coPilotControllerCommand.a().onTrue(new InstantCommand(() -> hood.setHoodPosition(0.03)));
+    // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> intake.setIntakePosition(45)));
+    // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    coPilotControllerCommand.y().onTrue(new InstantCommand(() -> hood.setHoodPosition(3.4)));
     // coPilotControllerCommand.a().whileTrue(new ShootCommand(shooter, intake, 2850, false));
     // coPilotControllerCommand.b().whileTrue(new ShootCommand(shooter, intake, 2775, false));
     // coPilotControllerCommand.y().whileTrue(new ShootCommand(shooter, intake, 2700, false));
@@ -128,23 +162,23 @@ public class RobotContainer {
 
     autoDelay = SmartDashboard.getNumber("Auto Delay", 0);
 
-    robotDrive.zeroHeading();
-    if (autoPosition.getSelected() == AutoPos.Center) {
-      robotDrive.setFieldRelativeOffset(180);
-    }
-    else if (autoPosition.getSelected() == AutoPos.Left) {
-      robotDrive.setFieldRelativeOffset(-135);
-    }
-    else if (autoPosition.getSelected() == AutoPos.Right) {
-      robotDrive.setFieldRelativeOffset(135);
-    }
-    // return new WaitCommand(autoDelay).andThen(autoChooser.getSelected());
-    return null;
+    // robotDrive.zeroHeading();
+    // if (autoPosition.getSelected() == AutoPos.LeftT_NZ) {
+    //   robotDrive.setFieldRelativeOffset(-80);
+    // }
+    // else if (autoPosition.getSelected() == AutoPos.RightT_NZ) {
+    //   robotDrive.setFieldRelativeOffset(80);
+    // }
+    // else {
+    //   robotDrive.setFieldRelativeOffset(0);
+    // }
+    return autoChooser.getSelected();
+    // return null;
   }
 
 
   public enum AutoPos{
-    Left, Center, Right
+    LeftT_NZ, CenterL, CenterR, RightT_NZ
   }
 
 }

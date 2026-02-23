@@ -169,22 +169,24 @@ public final class Configs {
 
                 static {
                         winchConfig
-                        .idleMode(IdleMode.kCoast)
+                        .idleMode(IdleMode.kBrake)
                         .smartCurrentLimit(40)
                         .voltageCompensation(12);
-                        // winchConfig.softLimit
-                        // .forwardSoftLimit(WinchConstants.kWinchTopPosition)
-                        // .forwardSoftLimitEnabled(false)
-                        // .reverseSoftLimit(WinchConstants.kWinchBottomPosition)
-                        // .reverseSoftLimitEnabled(false);
-                        // winchConfig.encoder
-                        // .positionConversionFactor((1 / WinchConstants.kWinchGearReduction))
-                        // .velocityConversionFactor((1 / WinchConstants.kWinchGearReduction) / 60);
+                        winchConfig.softLimit
+                        .forwardSoftLimit(WinchConstants.kWinchTopPosition)
+                        .forwardSoftLimitEnabled(true)
+                        .reverseSoftLimit(WinchConstants.kWinchBottomPosition)
+                        .reverseSoftLimitEnabled(true);
+                        winchConfig.encoder
+                        .positionConversionFactor((3.142 / WinchConstants.kWinchGearReduction))
+                        .velocityConversionFactor((3.142 / WinchConstants.kWinchGearReduction) / 60);
+                        winchConfig.closedLoop.feedForward
+                        .kV(9e-2);
                         winchConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(0.05, 2e-5, 0)
+                        .pid(0.07, 0e-6, 0)
                         .iZone(0.1)
-                        .outputRange(-0.75, 0.75);
+                        .outputRange(-1, 1);
 
                         winchFollowerConfig
                         .idleMode(IdleMode.kCoast)
@@ -200,7 +202,8 @@ public final class Configs {
 
                 static {
                         hoodConfig
-                        .idleMode(IdleMode.kCoast)
+                        .inverted(true)
+                        .idleMode(IdleMode.kBrake)
                         .smartCurrentLimit(20)
                         .voltageCompensation(12);
                         hoodConfig.encoder
@@ -208,14 +211,14 @@ public final class Configs {
                         .velocityConversionFactor((2.67 / HoodConstants.kHoodGearReduction)/60);
                         hoodConfig.softLimit
                         .forwardSoftLimit(HoodConstants.kHoodFinalPosition)
-                        .forwardSoftLimitEnabled(false)
+                        .forwardSoftLimitEnabled(true)
                         .reverseSoftLimit(HoodConstants.kHoodInitialPosition)
-                        .reverseSoftLimitEnabled(false);
+                        .reverseSoftLimitEnabled(true);
                         hoodConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(.05, 0, 0)
+                        .pid(.1, 1e-3, 0)
                         .iZone(0.1)
-                        .outputRange(-0.4, 0.4);
+                        .outputRange(-0.25, 0.25);
                 }
         }
 }

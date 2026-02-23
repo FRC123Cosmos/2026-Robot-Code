@@ -6,34 +6,26 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class AgitatedPulseAndShootCommand extends Command{
-
+public class PulseAndShootCommand extends Command{
+    
     private ShooterSubsystem shooterSubsystem;
     private IntakeSubsystem intakeSubsystem;
     private double shootSpeed;
-    private boolean stow;
 
     private final double pulseDutyCycle = 0.8;
     private final double pulseDuration = 0.3;
     private final double restDuration = 0.15;
-
-    private final double intakeHighPos = 10;
-    private final double intakeLowPos = 130;
 
     private final Timer timer = new Timer();
 
     private boolean isPulsing = true;
     private double lastSpeed = Double.NaN;
 
-    private boolean goingHigh = true;
-    private boolean wasAtTargetPos = false;
-
     
-    public AgitatedPulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, boolean stowIntake) {
+    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed) {
         this.shooterSubsystem = shooterSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.shootSpeed = shootSpeed;
-        this.stow = stowIntake;
         
         addRequirements(shooterSubsystem, intakeSubsystem);
     }
@@ -46,11 +38,7 @@ public class AgitatedPulseAndShootCommand extends Command{
 
         isPulsing = true;
 
-        goingHigh = true;
-        wasAtTargetPos = false;
-        intakeSubsystem.setIntakePosition(intakeHighPos);
-
-        intakeSubsystem.setIntakeRoller(IntakeConstants.intakeRollerAgitationSpeed);
+        intakeSubsystem.setIntakePosition(10);
         intakeSubsystem.setIndexer(pulseDutyCycle);
         shooterSubsystem.setShooterVelocity(shootSpeed);
     }
@@ -60,24 +48,7 @@ public class AgitatedPulseAndShootCommand extends Command{
         double elapsedTime = timer.get();
         double speed;
 
-        boolean atTargetPos = Math.abs(
-            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 30;
-
         shooterSubsystem.kickFuel(true);
-        intakeSubsystem.setIntakeRoller(-0.2);
-
-
-        if (atTargetPos && !wasAtTargetPos) {
-            goingHigh = !goingHigh;
-
-            if (goingHigh){
-                intakeSubsystem.setIntakePosition(intakeHighPos);
-            } else {
-                intakeSubsystem.setIntakePosition(intakeLowPos);
-            }
-        }
-
-        wasAtTargetPos = atTargetPos;
         
         if (isPulsing && elapsedTime >= pulseDuration) {
             speed = 0.0;
@@ -100,16 +71,7 @@ public class AgitatedPulseAndShootCommand extends Command{
     @Override
     public void end(boolean canceled) {
         shooterSubsystem.stopShooterSystem();
-        
         intakeSubsystem.setIndexer(0.0);
-        intakeSubsystem.setIntakeRoller(0.0);
         timer.stop();
-
-        if (stow) {
-            intakeSubsystem.setIntakePosition(10);
-        } else {
-            intakeSubsystem.setIntakePosition(100);
-        }
     }
-
 }

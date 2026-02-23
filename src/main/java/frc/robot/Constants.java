@@ -187,7 +187,7 @@ public final class Constants {
 
         public static final double indexerSpeed = 0.8;
         public static final double intakeSpeed = 0.65;
-        public static final double intakeRollerAgitationSpeed = -0.2;
+        public static final double intakeRollerAgitationSpeed = 0.2;
 
         public static final double indexerPulseSpeed = 0.8;
         public static final double kIndexerPulseDuration = 5;
@@ -202,7 +202,7 @@ public final class Constants {
         public static final double kWinchPositionDeadband = 0.2;
 
         public static final double kWinchBottomPosition = 0;
-        public static final double kWinchTopPosition = 30;
+        public static final double kWinchTopPosition = 5.5;
     }
 
     public static final class HoodConstants {
@@ -210,9 +210,9 @@ public final class Constants {
 
         public static final double kHoodGearReduction = 5;
 
-        public static final double kHoodPositionDeadband = 0.05;
+        public static final double kHoodPositionDeadband = 0.1;
 
         public static final double kHoodInitialPosition = 0;
-        public static final double kHoodFinalPosition = 5;
+        public static final double kHoodFinalPosition = 4;
     }
 }

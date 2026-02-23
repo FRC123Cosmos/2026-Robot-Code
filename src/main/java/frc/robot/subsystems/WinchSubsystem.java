@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
-import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -71,9 +71,7 @@ public class WinchSubsystem extends SubsystemBase{
 
     @Override
     public void periodic(){
-        // if (!atPosition()) {
-        //     kWinchController.setSetpoint(targetPosition, ControlType.kPosition);
-        // }
+        kWinchController.setSetpoint(targetPosition, ControlType.kPosition);
 
         SmartDashboard.putNumber("Winch Pos", getPos());
     }

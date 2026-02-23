@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1535641025641037,
-        "y": 5.6745769230769225
+        "x": 1.6250135880132324,
+        "y": 5.50973671497815
       },
       "isLocked": false,
       "linkedName": "CenterL_Start"
     },
     {
       "anchor": {
-        "x": 0.9907435897435908,
-        "y": 5.976910256410256
+        "x": 0.8512051282051294,
+        "y": 5.965282051282052
       },
       "prevControl": {
-        "x": 2.0256538461538476,
-        "y": 5.732717948717948
+        "x": 1.2624850684840045,
+        "y": 6.061936869307358
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8,
+      "minWaypointRelativePos": 0.5779036827195458,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 0.5,

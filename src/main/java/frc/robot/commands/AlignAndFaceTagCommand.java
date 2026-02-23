@@ -20,7 +20,7 @@ public class AlignAndFaceTagCommand extends Command {
 
     // Tolerances
     private static final double POSITION_TOLERANCE = 0.05; // meters
-    private static final double ANGLE_TOLERANCE_RAD = 1.0*(Math.PI)/180;     // radians
+    private static final double ANGLE_TOLERANCE_RAD = Units.degreesToRadians(1);     // radians
 
     // Setpoints
     private final double targetOffsetX;
@@ -91,8 +91,7 @@ public class AlignAndFaceTagCommand extends Command {
         driveSubsystem.drive(
                 -xCmd,      // forward/back
                 -yCmd,      // strafe
-                rotCmd,   // rotation 
-                false,
+                rotCmd, false,
                 true
         );
     }

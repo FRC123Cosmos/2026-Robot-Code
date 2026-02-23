@@ -7,8 +7,8 @@ public class OscillateIntakeCommand extends Command{
 
     private IntakeSubsystem intakeSubsystem;
 
-    private final double highPos = 75;
-    private final double lowPos = 120;
+    private final double highPos = 60;
+    private final double lowPos = 140;
 
     private boolean goingHigh = true;
     private boolean wasAtTargetPos = false;
@@ -28,7 +28,7 @@ public class OscillateIntakeCommand extends Command{
     @Override
     public void execute() {
         boolean atTargetPos = Math.abs(
-            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 20;
+            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 40;
 
         if (atTargetPos && !wasAtTargetPos) {
             goingHigh = !goingHigh;

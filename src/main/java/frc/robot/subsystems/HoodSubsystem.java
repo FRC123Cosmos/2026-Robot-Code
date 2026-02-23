@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -51,7 +52,7 @@ public class HoodSubsystem extends SubsystemBase{
     public void periodic(){
         SmartDashboard.putNumber("Hood Pos", getHoodPos());
 
-        // kHoodController.setSetpoint(targetPosition, ControlType.kPosition);
+        kHoodController.setSetpoint(targetPosition, ControlType.kPosition);
     }
 
 }
