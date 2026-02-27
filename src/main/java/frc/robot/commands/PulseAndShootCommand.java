@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -10,10 +10,12 @@ public class PulseAndShootCommand extends Command{
     
     private ShooterSubsystem shooterSubsystem;
     private IntakeSubsystem intakeSubsystem;
+    private HoodSubsystem hoodSubsystem;
     private double shootSpeed;
+    private boolean isFar;
 
-    private final double pulseDutyCycle = 0.8;
-    private final double pulseDuration = 0.3;
+    private final double pulseDutyCycle = 0.65;
+    private final double pulseDuration = 0.5;
     private final double restDuration = 0.15;
 
     private final Timer timer = new Timer();
@@ -22,12 +24,14 @@ public class PulseAndShootCommand extends Command{
     private double lastSpeed = Double.NaN;
 
     
-    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed) {
+    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, HoodSubsystem hoodSubsystem, boolean isFar) {
         this.shooterSubsystem = shooterSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.shootSpeed = shootSpeed;
+        this.hoodSubsystem = hoodSubsystem;
+        this.isFar = isFar;
         
-        addRequirements(shooterSubsystem, intakeSubsystem);
+        addRequirements(shooterSubsystem, intakeSubsystem, hoodSubsystem);
     }
 
     @Override
@@ -41,6 +45,11 @@ public class PulseAndShootCommand extends Command{
         intakeSubsystem.setIntakePosition(10);
         intakeSubsystem.setIndexer(pulseDutyCycle);
         shooterSubsystem.setShooterVelocity(shootSpeed);
+
+        if (isFar) {
+            hoodSubsystem.setHoodPosition(3.4);
+        }
+
     }
 
     @Override
@@ -72,6 +81,7 @@ public class PulseAndShootCommand extends Command{
     public void end(boolean canceled) {
         shooterSubsystem.stopShooterSystem();
         intakeSubsystem.setIndexer(0.0);
+        hoodSubsystem.setHoodPosition(0.00);
         timer.stop();
     }
 }

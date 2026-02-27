@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.Degrees;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.studica.frc.Navx;
+// import com.studica.frc.Navx;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -39,7 +39,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     // instance of gyro for orientantion
     // parameter for the gyro specifies the port for connection
-    private final Navx gyro = new Navx(0, 100);
+    // private final Navx gyro = new Navx(0, 100);
+
+    private final AHRS gyro = new AHRS(NavXComType.kMXP_SPI);
 
     private double fieldRelativeOffset = 0;
 
@@ -68,8 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
                 && DriverStation.getAlliance().get() == DriverStation.Alliance.Red) ? true : false;
             },
             this // Reference to this subsystem to set requirements
-    );
-        // setupPathPlanner();
+        );
         SmartDashboard.putData("Field", field);
     }
     // movement variables
@@ -87,7 +88,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     // instance for tracing the robot's position(odometer)
     SwerveDriveOdometry odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
-            Rotation2d.fromDegrees(gyro.getYaw().in(Degrees)), new SwerveModulePosition[] {
+            Rotation2d.fromDegrees(gyro.getAngle()), new SwerveModulePosition[] {
                     kFLeft.getPosition(), 
                     kFRight.getPosition(), 
                     kBLeft.getPosition(), 
@@ -99,7 +100,7 @@ public class DriveSubsystem extends SubsystemBase {
     public void periodic() {
         // updates the odometry using the current values gyro and position
         odometry.update(
-                Rotation2d.fromDegrees(gyro.getYaw().in(Degrees)),
+                Rotation2d.fromDegrees(gyro.getAngle()),
                 new SwerveModulePosition[] {
                         kFLeft.getPosition(),
                         kFRight.getPosition(),
@@ -111,7 +112,7 @@ public class DriveSubsystem extends SubsystemBase {
         field.setRobotPose(getP());
         
         SmartDashboard.putString("odometry", odometry.getPoseMeters().toString());
-        SmartDashboard.putNumber("Gyro Ang", getHeading());
+        SmartDashboard.putNumber("Gyro Ang", gyro.getAngle());
     }
 
     public Pose2d getP() {
@@ -121,7 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     // resets the odometry by utilizing the current gyro angle and module positions
     public void resetOdometry(Pose2d pose) {
-        odometry.resetPosition(Rotation2d.fromDegrees(gyro.getYaw().in(Degrees)),
+        odometry.resetPosition(Rotation2d.fromDegrees(gyro.getAngle()),
                 new SwerveModulePosition[] { 
                     kFLeft.getPosition(),
                     kFRight.getPosition(),
@@ -222,7 +223,7 @@ public class DriveSubsystem extends SubsystemBase {
                 // speeds are converted to robot-relative speeds
                 fieldrelative
                         ? ChassisSpeeds.fromFieldRelativeSpeeds(finalx, finaly, finalrot,
-                                Rotation2d.fromDegrees(gyro.getYaw().in(Degrees)).plus(Rotation2d.fromDegrees(fieldRelativeOffset)))
+                                Rotation2d.fromDegrees(gyro.getAngle()).plus(Rotation2d.fromDegrees(fieldRelativeOffset)))
                         : new ChassisSpeeds(finalx, finaly, finalrot));
 
         // checks and makes sure none of the module states exceeds the max allowed
@@ -263,13 +264,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     // resets the gyro heading to zero
     public void zeroHeading() {
-        gyro.resetYaw();
+        gyro.reset();
         fieldRelativeOffset = 0;
     }
 
     // returns robot's heading in degrees (reading from gyro)
     public double getHeading() {
-        return Rotation2d.fromDegrees(gyro.getYaw().in(Degrees)).getDegrees();
+        return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
     }
 
     public void setFieldRelativeOffset(double offset) {
@@ -317,40 +318,4 @@ public class DriveSubsystem extends SubsystemBase {
         kBRight.setState(moduleStates[3]);
     }
 
-    public void setupPathPlanner(){
-    
-      // Configure AutoBuilder last
-      AutoBuilder.configure(
-          this::getP,
-          // Robot pose supplier
-          this::resetOdometry,
-          // Method to reset odometry (will be called if your auto has a starting pose)
-          this::getRobotRelativeSpeeds,
-          // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-          (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
-          new PPHolonomicDriveController(
-              // PPHolonomicController is the built in path following controller for holonomic drive trains
-              new PIDConstants(5.0, 0.0, 0.0),
-              // Translation PID constants
-              new PIDConstants(5.0, 0.0, 0.0)
-              // Rotation PID constants
-          ),
-          AutoConstants.ROBOT_CONFIG,
-          // The robot configuration
-          () -> {
-            // Boolean supplier that controls when the path will be mirrored for the red alliance
-            // This will flip the path being followed to the red side of the field.
-            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent())
-            {
-              return alliance.get() == DriverStation.Alliance.Red;
-            }
-            return false;
-          },
-          this
-          // Reference to this subsystem to set requirements
-        );
-    }
 }

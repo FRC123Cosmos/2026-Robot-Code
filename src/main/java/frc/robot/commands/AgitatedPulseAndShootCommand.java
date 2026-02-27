@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -10,11 +11,12 @@ public class AgitatedPulseAndShootCommand extends Command{
 
     private ShooterSubsystem shooterSubsystem;
     private IntakeSubsystem intakeSubsystem;
+    private HoodSubsystem hoodSubsystem;
     private double shootSpeed;
     private boolean stow;
 
-    private final double pulseDutyCycle = 0.8;
-    private final double pulseDuration = 0.3;
+    private final double pulseDutyCycle = 0.6;
+    private final double pulseDuration = 0.5;
     private final double restDuration = 0.15;
 
     private final double intakeHighPos = 10;
@@ -27,15 +29,19 @@ public class AgitatedPulseAndShootCommand extends Command{
 
     private boolean goingHigh = true;
     private boolean wasAtTargetPos = false;
+    private boolean isFar;
 
     
-    public AgitatedPulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, boolean stowIntake) {
+    public AgitatedPulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, 
+        boolean stowIntake, HoodSubsystem hoodSubsystem, boolean isFar) {
         this.shooterSubsystem = shooterSubsystem;
         this.intakeSubsystem = intakeSubsystem;
+        this.hoodSubsystem = hoodSubsystem;
         this.shootSpeed = shootSpeed;
         this.stow = stowIntake;
+        this.isFar = isFar;
         
-        addRequirements(shooterSubsystem, intakeSubsystem);
+        addRequirements(shooterSubsystem, intakeSubsystem, hoodSubsystem);
     }
 
     @Override
@@ -50,9 +56,12 @@ public class AgitatedPulseAndShootCommand extends Command{
         wasAtTargetPos = false;
         intakeSubsystem.setIntakePosition(intakeHighPos);
 
-        intakeSubsystem.setIntakeRoller(IntakeConstants.intakeRollerAgitationSpeed);
         intakeSubsystem.setIndexer(pulseDutyCycle);
         shooterSubsystem.setShooterVelocity(shootSpeed);
+
+        if (isFar) {
+            hoodSubsystem.setHoodPosition(3.4);
+        }
     }
 
     @Override
@@ -64,7 +73,6 @@ public class AgitatedPulseAndShootCommand extends Command{
             (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 30;
 
         shooterSubsystem.kickFuel(true);
-        intakeSubsystem.setIntakeRoller(-0.2);
 
 
         if (atTargetPos && !wasAtTargetPos) {
@@ -102,8 +110,9 @@ public class AgitatedPulseAndShootCommand extends Command{
         shooterSubsystem.stopShooterSystem();
         
         intakeSubsystem.setIndexer(0.0);
-        intakeSubsystem.setIntakeRoller(0.0);
         timer.stop();
+
+        hoodSubsystem.setHoodPosition(0.00);
 
         if (stow) {
             intakeSubsystem.setIntakePosition(10);

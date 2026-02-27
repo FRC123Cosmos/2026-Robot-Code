@@ -104,10 +104,8 @@ public class FaceTagCommand extends Command {
     private final PIDController thetaController;
 
     private final double angleTolerance = .5;    // Degree 
-    private double targetOffsetTheta; 
     private double targetSetpointTheta; 
     private double targetTheta;
-    private double targetErrorTheta;
     private double pidOutTheta;
     private double thetaSpeed;
     
@@ -120,7 +118,6 @@ public class FaceTagCommand extends Command {
     public FaceTagCommand(DriveSubsystem driveSubsystem, VisionSubsystem visionSubsystem, double targetOffsetTheta) {
         this.driveSubsystem = driveSubsystem;
         this.visionSubsystem = visionSubsystem;
-        this.targetOffsetTheta = targetOffsetTheta;
 
         this.thetaController = new PIDController(1, 0.0, 0.0);
         thetaController.enableContinuousInput(-180,180);
@@ -132,7 +129,6 @@ public class FaceTagCommand extends Command {
     @Override
     public void initialize() {
         thetaController.reset();
-        targetErrorTheta = 0.0;
         pidOutTheta = 0.0;
         targetSetpointTheta = 0;
         thetaSpeed = 0.0;
@@ -146,23 +142,21 @@ public class FaceTagCommand extends Command {
 
     @Override
     public void execute() {
-        // if (visionSubsystem.hasTarget()) {
+        if (visionSubsystem.hasTarget()) {
 
             targetTheta = VisionSubsystem.getTarget_rawYaw();
             pidOutTheta = thetaController.calculate(targetTheta, targetSetpointTheta);
-            targetErrorTheta = thetaController.getError();
 
             thetaSpeed = Math.max(-.1, Math.min(.1, pidOutTheta)); // degrees/sec
 
 
             driveSubsystem.drive(0, 0, thetaSpeed, false, true);    // try fieldrelative true?
 
-        // } else {
-        //     pidOutTheta = 0.0;
-        //     thetaSpeed = 0.0;
-        //     targetErrorTheta = 0.0;
-        //     driveSubsystem.drive(0.0, 0.0, 0.0, false, false);
-        // }
+        } else {
+            pidOutTheta = 0.0;
+            thetaSpeed = 0.0;
+            driveSubsystem.drive(0.0, 0.0, 0.0, false, false);
+        }
 
         // SmartDashboard.putNumber("TS Theta", targetSetpointTheta);
         // SmartDashboard.putNumber("Target Theta", targetTheta);

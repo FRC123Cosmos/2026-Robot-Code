@@ -95,7 +95,7 @@ public final class Constants {
     public static final class AutoConstants {
 
             public static final RobotConfig ROBOT_CONFIG = new RobotConfig(
-                70.0,         // Mass from "robotMass"
+                55.0,         // Mass from "robotMass"
                 6.883, // MOI from "robotMOI"
                 new ModuleConfig(
                 ModuleConstants.kWheelRadiusMeters,              // Motor type from "driveMotorType"
@@ -165,7 +165,7 @@ public final class Constants {
         public static final int kShooterFollowerCANID = 10;
         public static final int kKickerCANID = 11;
 
-        public static final double kickerKickSpeed = 0.5;
+        public static final double kickerKickSpeed = 0.65;
 
         public static final double kShooterSpeedDeadband = 300;
 

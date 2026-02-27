@@ -69,7 +69,7 @@ public class OscillatedPulseAndIntakeCommand extends Command{
         double speed;
 
         if (isPulsing && elapsedTime >= pulseDuration) {
-            speed = -0.15;
+            speed = 0.0;
             isPulsing = false;
             timer.reset();
         } else if (!isPulsing && elapsedTime >= restDuration) {
@@ -90,7 +90,7 @@ public class OscillatedPulseAndIntakeCommand extends Command{
     public void end(boolean canceled) {
         timer.stop();
 
-        intakeSubsystem.setIntakePosition(100);
+        intakeSubsystem.setIntakePosition(25);
 
         intakeSubsystem.setIntakeRoller(0.0);
         intakeSubsystem.setIndexer(0.0);

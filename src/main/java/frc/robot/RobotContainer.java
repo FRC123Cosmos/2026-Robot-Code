@@ -10,11 +10,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AgitatedPulseAndShootCommand;
-import frc.robot.commands.AlignAndFaceTagCommand;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.commands.FaceTagCommand;
 import frc.robot.commands.OscillatedPulseAndIntakeCommand;
@@ -29,7 +27,7 @@ import frc.robot.subsystems.WinchSubsystem;
 public class RobotContainer {
 
   private final DriveSubsystem robotDrive = new DriveSubsystem();
-  private final VisionSubsystem vision = new VisionSubsystem();
+  // private final VisionSubsystem vision = new VisionSubsystem();
   private final IntakeSubsystem intake = new  IntakeSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final WinchSubsystem winch = new WinchSubsystem();
@@ -54,9 +52,10 @@ public class RobotContainer {
     /* ---------------------------------------------PathPlanner Commands---------------------------------------- */
 
     NamedCommands.registerCommand("OscillateIntake", new OscillatedPulseAndIntakeCommand(intake));
-    NamedCommands.registerCommand("Shoot", new PulseAndShootCommand(shooter, intake, 3000));
-    NamedCommands.registerCommand("AgitatedShoot", 
-      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true));
+    NamedCommands.registerCommand("ShootFar", new PulseAndShootCommand(shooter, intake, 3000, hood, true));
+    NamedCommands.registerCommand("ShootClose", new PulseAndShootCommand(shooter, intake, 2700, hood, false));
+    NamedCommands.registerCommand("AgitatedShootFar", 
+      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, false));
     NamedCommands.registerCommand("lowerWinch", new InstantCommand(() -> winch.setWinchPos(0.0)));
 
     /* ----------------------------------------------PathPlanner Events----------------------------------------- */
@@ -80,7 +79,6 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser("Test_Auto");
     SmartDashboard.putData("Auto Mode", autoChooser);
     SmartDashboard.putNumber("Auto Delay", 0);
-
   }
 
   private void configureBindings() {
@@ -88,7 +86,7 @@ public class RobotContainer {
     // -------------------------------- Driver Controller Binding ----------------------------------- //
     robotDrive.setDefaultCommand(new DefaultDriveCommand(robotDrive));
 
-    driverControllerCommand.a().whileTrue(new FaceTagCommand(robotDrive, vision, 0.0));
+    // driverControllerCommand.a().whileTrue(new FaceTagCommand(robotDrive, vision, 0.0));
     // driverControllerCommand.a().whileTrue(new AlignToTagCommand(robotDrive, vision));
     driverControllerCommand.y().whileTrue(new RunCommand(() -> robotDrive.setX()));
     driverControllerCommand.start().onTrue(new InstantCommand(() -> robotDrive.zeroHeading(), robotDrive));
@@ -100,18 +98,21 @@ public class RobotContainer {
       () -> intake.setIndexer(0.0)));
 
     coPilotControllerCommand.rightBumper().whileTrue(
-      new AgitatedPulseAndShootCommand(shooter, intake, 2700, true));
+      new AgitatedPulseAndShootCommand(shooter, intake, 2700, true, hood, false));
+
+    // coPilotControllerCommand.rightBumper().whileTrue(new StartEndCommand(
+    //   () -> intake.setIndexer(0.8), 
+    //   () -> intake.setIndexer(0.0)));
 
 
     // coPilotControllerCommand.rightBumper().whileTrue(
-    //   new PulseAndShootCommand(shooter, intake, 3500));
+    //   new PulseAndShootCommand(shooter, intake, 3000));
     coPilotControllerCommand.rightTrigger().whileTrue(
-      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true));
+      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, true));
 
 
     coPilotControllerCommand.povUp().onTrue(new InstantCommand(() -> winch.setWinchPos(5)));
     coPilotControllerCommand.povDown().onTrue(new InstantCommand(() -> winch.setWinchPos(0.0)));
-
 
     // coPilotControllerCommand.rightTrigger().whileTrue(new ShootCommand(shooter, intake, 3000, false));
     // controllerOne.leftBumper().whileTrue(new IntakeCommand(intake, false));
@@ -123,13 +124,13 @@ public class RobotContainer {
 
     coPilotControllerCommand.start().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
 
-    coPilotControllerCommand.a().onTrue(new InstantCommand(() -> hood.setHoodPosition(0.03)));
-    // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> intake.setIntakePosition(45)));
-    // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
-    coPilotControllerCommand.y().onTrue(new InstantCommand(() -> hood.setHoodPosition(3.4)));
-    // coPilotControllerCommand.a().whileTrue(new ShootCommand(shooter, intake, 2850, false));
-    // coPilotControllerCommand.b().whileTrue(new ShootCommand(shooter, intake, 2775, false));
-    // coPilotControllerCommand.y().whileTrue(new ShootCommand(shooter, intake, 2700, false));
+    coPilotControllerCommand.a().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+    // // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> intake.setIntakePosition(45)));
+    // // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    // coPilotControllerCommand.y().onTrue(new InstantCommand(() -> hood.setHoodPosition(3.4)));
+    // // coPilotControllerCommand.a().whileTrue(new ShootCommand(shooter, intake, 2850, false));
+    // // coPilotControllerCommand.b().whileTrue(new ShootCommand(shooter, intake, 2775, false));
+    // // coPilotControllerCommand.y().whileTrue(new ShootCommand(shooter, intake, 2700, false));
   }
 
   // private boolean leftTrigger() {
@@ -160,7 +161,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
 
-    autoDelay = SmartDashboard.getNumber("Auto Delay", 0);
+    // autoDelay = SmartDashboard.getNumber("Auto Delay", 0);
 
     // robotDrive.zeroHeading();
     // if (autoPosition.getSelected() == AutoPos.LeftT_NZ) {
