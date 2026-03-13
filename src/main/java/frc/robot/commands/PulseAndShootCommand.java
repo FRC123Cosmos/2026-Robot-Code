@@ -24,7 +24,8 @@ public class PulseAndShootCommand extends Command{
     private double lastSpeed = Double.NaN;
 
     
-    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, double shootSpeed, HoodSubsystem hoodSubsystem, boolean isFar) {
+    public PulseAndShootCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, 
+        double shootSpeed, HoodSubsystem hoodSubsystem, boolean isFar) {
         this.shooterSubsystem = shooterSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.shootSpeed = shootSpeed;
@@ -48,6 +49,8 @@ public class PulseAndShootCommand extends Command{
 
         if (isFar) {
             hoodSubsystem.setHoodPosition(3.4);
+        } else {
+            hoodSubsystem.setHoodPosition(-0.11);
         }
 
     }
@@ -81,7 +84,6 @@ public class PulseAndShootCommand extends Command{
     public void end(boolean canceled) {
         shooterSubsystem.stopShooterSystem();
         intakeSubsystem.setIndexer(0.0);
-        hoodSubsystem.setHoodPosition(0.00);
         timer.stop();
     }
 }

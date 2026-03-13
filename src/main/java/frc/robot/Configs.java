@@ -181,18 +181,33 @@ public final class Configs {
                         .positionConversionFactor((3.142 / WinchConstants.kWinchGearReduction))
                         .velocityConversionFactor((3.142 / WinchConstants.kWinchGearReduction) / 60);
                         winchConfig.closedLoop.feedForward
-                        .kV(9e-2);
+                        .kV(9e-1);
                         winchConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(0.07, 0e-6, 0)
+                        .pid(0.5, 1e-6, 0)
                         .iZone(0.1)
                         .outputRange(-1, 1);
 
                         winchFollowerConfig
-                        .idleMode(IdleMode.kCoast)
+                        .idleMode(IdleMode.kBrake)
                         .follow(WinchConstants.kWinchCANID, true)
                         .smartCurrentLimit(40)
                         .voltageCompensation(12);
+                        winchFollowerConfig.softLimit
+                        .forwardSoftLimit(WinchConstants.kWinchTopPosition)
+                        .forwardSoftLimitEnabled(true)
+                        .reverseSoftLimit(WinchConstants.kWinchBottomPosition)
+                        .reverseSoftLimitEnabled(true);
+                        winchFollowerConfig.encoder
+                        .positionConversionFactor((3.142 / WinchConstants.kWinchGearReduction))
+                        .velocityConversionFactor((3.142 / WinchConstants.kWinchGearReduction) / 60);
+                        winchFollowerConfig.closedLoop.feedForward
+                        .kV(9e-1);
+                        winchFollowerConfig.closedLoop
+                        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                        .pid(0.5, 1e-6, 0)
+                        .iZone(0.1)
+                        .outputRange(-1, 1);
                 }
         }
 

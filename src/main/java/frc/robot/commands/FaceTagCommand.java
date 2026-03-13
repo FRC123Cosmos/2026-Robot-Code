@@ -103,7 +103,7 @@ public class FaceTagCommand extends Command {
 
     private final PIDController thetaController;
 
-    private final double angleTolerance = .5;    // Degree 
+    private final double angleTolerance = 1;    // Degree 
     private double targetSetpointTheta; 
     private double targetTheta;
     private double pidOutTheta;
@@ -130,7 +130,7 @@ public class FaceTagCommand extends Command {
     public void initialize() {
         thetaController.reset();
         pidOutTheta = 0.0;
-        targetSetpointTheta = 0;
+        targetSetpointTheta = -10;
         thetaSpeed = 0.0;
 
         // SmartDashboard.putNumber("TS Theta", targetSetpointTheta);
@@ -147,10 +147,10 @@ public class FaceTagCommand extends Command {
             targetTheta = VisionSubsystem.getTarget_rawYaw();
             pidOutTheta = thetaController.calculate(targetTheta, targetSetpointTheta);
 
-            thetaSpeed = Math.max(-.1, Math.min(.1, pidOutTheta)); // degrees/sec
+            thetaSpeed = Math.max(-.2, Math.min(.2, pidOutTheta)); // degrees/sec
 
 
-            driveSubsystem.drive(0, 0, thetaSpeed, false, true);    // try fieldrelative true?
+            driveSubsystem.drive(0, 0, thetaSpeed, false, false);    // try fieldrelative true?
 
         } else {
             pidOutTheta = 0.0;

@@ -1,5 +1,6 @@
 package frc.robot;
 
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.events.EventTrigger;
@@ -9,17 +10,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AgitatedPulseAndShootCommand;
+import frc.robot.commands.AlignToTagCommand;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.commands.FaceTagCommand;
 import frc.robot.commands.OscillatedPulseAndIntakeCommand;
+import frc.robot.commands.PulseAndIntakeCommand;
 import frc.robot.commands.PulseAndShootCommand;
+import frc.robot.commands.TranslateToHubCommand;
+import frc.robot.commands.UnjamHopperCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.WinchSubsystem;
@@ -27,7 +35,7 @@ import frc.robot.subsystems.WinchSubsystem;
 public class RobotContainer {
 
   private final DriveSubsystem robotDrive = new DriveSubsystem();
-  // private final VisionSubsystem vision = new VisionSubsystem();
+  private final VisionSubsystem vision = new VisionSubsystem();
   private final IntakeSubsystem intake = new  IntakeSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final WinchSubsystem winch = new WinchSubsystem();
@@ -55,14 +63,19 @@ public class RobotContainer {
     NamedCommands.registerCommand("ShootFar", new PulseAndShootCommand(shooter, intake, 3000, hood, true));
     NamedCommands.registerCommand("ShootClose", new PulseAndShootCommand(shooter, intake, 2700, hood, false));
     NamedCommands.registerCommand("AgitatedShootFar", 
-      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, false));
-    NamedCommands.registerCommand("lowerWinch", new InstantCommand(() -> winch.setWinchPos(0.0)));
+      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, true));
+    NamedCommands.registerCommand("AgitatedShootClose", 
+      new AgitatedPulseAndShootCommand(shooter, intake, 2700, true, hood, false));
+    NamedCommands.registerCommand("LowerWinch", 
+      new InstantCommand(() -> hood.setHoodPosition(-0.11))
+      .andThen(new InstantCommand(() -> winch.setWinchPos(0.0))));
+    NamedCommands.registerCommand("UnjamHopper", new UnjamHopperCommand(shooter, intake));
 
-    /* ----------------------------------------------PathPlanner Events----------------------------------------- */
+    // /* ----------------------------------------------PathPlanner Events----------------------------------------- */
 
-    new EventTrigger("raiseWinch").onTrue(new InstantCommand(() -> winch.setWinchPos(5)));
-    new EventTrigger("intakeOut").onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
-    new EventTrigger("intakeIn").onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+    new EventTrigger("RaiseWinch").onTrue(new InstantCommand(() -> winch.setWinchPos(5.25)));
+    new EventTrigger("IntakeOut").onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    new EventTrigger("IntakeIn").onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
 
     /* -------------------------------------------End of PathPlanner Block--------------------------------------- */
 
@@ -70,13 +83,12 @@ public class RobotContainer {
 
     autoPosition = new SendableChooser<AutoPos>();
     autoPosition.addOption("Left(Trench)", AutoPos.LeftT_NZ);
-    autoPosition.addOption("Center Left", AutoPos.CenterL);
-    autoPosition.addOption("Center Right", AutoPos.CenterR);
+    autoPosition.addOption("Center", AutoPos.Center);
     autoPosition.addOption("Right(Trench)", AutoPos.RightT_NZ);
-    autoPosition.setDefaultOption("Center Left", AutoPos.CenterL);
+    autoPosition.setDefaultOption("Center", AutoPos.Center);
     SmartDashboard.putData("Auto Pos", autoPosition);
 
-    autoChooser = AutoBuilder.buildAutoChooser("Test_Auto");
+    autoChooser = AutoBuilder.buildAutoChooser("CenterLeft_Depot(Intake-First)");
     SmartDashboard.putData("Auto Mode", autoChooser);
     SmartDashboard.putNumber("Auto Delay", 0);
   }
@@ -86,32 +98,34 @@ public class RobotContainer {
     // -------------------------------- Driver Controller Binding ----------------------------------- //
     robotDrive.setDefaultCommand(new DefaultDriveCommand(robotDrive));
 
-    // driverControllerCommand.a().whileTrue(new FaceTagCommand(robotDrive, vision, 0.0));
-    // driverControllerCommand.a().whileTrue(new AlignToTagCommand(robotDrive, vision));
+    // driverControllerCommand.a().whileTrue(new TranslateToHubCommand(robotDrive, vision, -10, 1.4));
+
+    // driverControllerCommand.a().whileTrue(new AlignToTagCommand(robotDrive, vision,0.0,1.4));
+    driverControllerCommand.a().whileTrue(new FaceTagCommand(robotDrive, vision));
+    // driverControllerCommand.a().whileTrue(new AlignToTagCommand(robotDrive, vision, 10, 50));
     driverControllerCommand.y().whileTrue(new RunCommand(() -> robotDrive.setX()));
     driverControllerCommand.start().onTrue(new InstantCommand(() -> robotDrive.zeroHeading(), robotDrive));
 
+    new Trigger(vision::isAtShortDistance)
+    .onTrue(new InstantCommand(() -> LedSubsystem.blinkYellowFast()))
+    .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
+    new Trigger(vision::isAtLongDistance)
+    .onTrue(new InstantCommand(() -> LedSubsystem.blinkPurpleFast()))
+    .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
+
     // -------------------------------- CoPilot Controller Binding ----------------------------------- //
     coPilotControllerCommand.leftTrigger().whileTrue(new OscillatedPulseAndIntakeCommand(intake));
-    coPilotControllerCommand.leftBumper().whileTrue( new StartEndCommand(
-      () -> intake.setIndexer(-0.3), 
-      () -> intake.setIndexer(0.0)));
+    coPilotControllerCommand.leftBumper().whileTrue( new UnjamHopperCommand(shooter, intake));
+    // coPilotControllerCommand.leftBumper().whileTrue( new PulseAndIntakeCommand(intake));
+    
 
     coPilotControllerCommand.rightBumper().whileTrue(
       new AgitatedPulseAndShootCommand(shooter, intake, 2700, true, hood, false));
-
-    // coPilotControllerCommand.rightBumper().whileTrue(new StartEndCommand(
-    //   () -> intake.setIndexer(0.8), 
-    //   () -> intake.setIndexer(0.0)));
-
-
-    // coPilotControllerCommand.rightBumper().whileTrue(
-    //   new PulseAndShootCommand(shooter, intake, 3000));
     coPilotControllerCommand.rightTrigger().whileTrue(
       new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, true));
 
 
-    coPilotControllerCommand.povUp().onTrue(new InstantCommand(() -> winch.setWinchPos(5)));
+    coPilotControllerCommand.povUp().onTrue(new InstantCommand(() -> winch.setWinchPos(5.25))); // 3.25
     coPilotControllerCommand.povDown().onTrue(new InstantCommand(() -> winch.setWinchPos(0.0)));
 
     // coPilotControllerCommand.rightTrigger().whileTrue(new ShootCommand(shooter, intake, 3000, false));
@@ -122,11 +136,15 @@ public class RobotContainer {
     //     new RunCommand(() -> shooter.kickFuel(true), shooter)
     //   ));
 
-    coPilotControllerCommand.start().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+    // coPilotControllerCommand.start().whilteTrue(new PulseAndShootCommand(shooter, intake, 2700, hood, false));
 
+    coPilotControllerCommand.x().whileTrue(new PulseAndIntakeCommand(intake));
     coPilotControllerCommand.a().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
-    // // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> intake.setIntakePosition(45)));
-    // // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> winch.decremPos()));
+    // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> winch.incremPos()));
+    coPilotControllerCommand.b().whileTrue(new PulseAndShootCommand(shooter, intake, 3000, hood, true));
+
+    coPilotControllerCommand.y().whileTrue(new PulseAndShootCommand(shooter, intake, 2700, hood, false));
     // coPilotControllerCommand.y().onTrue(new InstantCommand(() -> hood.setHoodPosition(3.4)));
     // // coPilotControllerCommand.a().whileTrue(new ShootCommand(shooter, intake, 2850, false));
     // // coPilotControllerCommand.b().whileTrue(new ShootCommand(shooter, intake, 2775, false));
@@ -161,25 +179,24 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
 
-    // autoDelay = SmartDashboard.getNumber("Auto Delay", 0);
+    autoDelay = SmartDashboard.getNumber("Auto Delay", 0);
 
-    // robotDrive.zeroHeading();
-    // if (autoPosition.getSelected() == AutoPos.LeftT_NZ) {
-    //   robotDrive.setFieldRelativeOffset(-80);
-    // }
-    // else if (autoPosition.getSelected() == AutoPos.RightT_NZ) {
-    //   robotDrive.setFieldRelativeOffset(80);
-    // }
-    // else {
-    //   robotDrive.setFieldRelativeOffset(0);
-    // }
-    return autoChooser.getSelected();
-    // return null;
+    robotDrive.zeroHeading();
+    if (autoPosition.getSelected() == AutoPos.LeftT_NZ) {
+      robotDrive.setFieldRelativeOffset(-90);
+    }
+    else if (autoPosition.getSelected() == AutoPos.RightT_NZ) {
+      robotDrive.setFieldRelativeOffset(90);
+    }
+    else {
+      robotDrive.setFieldRelativeOffset(0);
+    }
+    return new WaitCommand(autoDelay).andThen(autoChooser.getSelected());
   }
 
 
   public enum AutoPos{
-    LeftT_NZ, CenterL, CenterR, RightT_NZ
+    LeftT_NZ, Center, RightT_NZ
   }
 
 }

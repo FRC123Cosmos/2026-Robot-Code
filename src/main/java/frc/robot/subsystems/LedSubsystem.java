@@ -74,7 +74,7 @@ public class LedSubsystem extends SubsystemBase {
         blink_alliance_buffer = new AddressableLEDBuffer(LEDConstants.ledBufferLength);
         cosmic_buffer = new AddressableLEDBuffer(LEDConstants.ledBufferLength);
         led_purple = new AddressableLEDBuffer(LEDConstants.ledBufferLength);
-        scroll_buffer = new AddressableLEDBuffer(LEDConstants.ledLength);
+        scroll_buffer = new AddressableLEDBuffer(LEDConstants.ledBufferLength);
         
         // initial message for led buffers
         for (int i = 0 ; i < LEDConstants.ledLength; i++){
@@ -280,6 +280,67 @@ public class LedSubsystem extends SubsystemBase {
         }, 0, 20); // Start immediately, update every 20ms (50 Hz)
     }
 
+    public static void blinkOrangeFast() {
+        // Stop any existing animation
+        if (animationTimer != null) {
+            animationTimer.cancel();
+            animationTimer = null;
+        }
+        
+        // Start a new timer for the blinking alliance color
+        animationTimer = new java.util.Timer();
+        animationTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                double currentTime = Timer.getFPGATimestamp();
+                
+                // Switch phases if enough time has passed
+                if (currentTime - blinkLastChangeTime >= BLINK_INTERVAL_FAST) {
+                    blinkIsOn = !blinkIsOn;
+                    blinkLastChangeTime = currentTime;
+                }
+                
+                if (blinkIsOn) {
+                    ledBar.setData(led_orange);
+                } else {
+                    // Turn off (black)
+                    ledBar.setData(led_blank);
+                }
+            }
+        }, 0, 20); // Start immediately, update every 20ms (50 Hz)
+    }
+
+    public static void blinkPurpleFast() {
+        // Stop any existing animation
+        if (animationTimer != null) {
+            animationTimer.cancel();
+            animationTimer = null;
+        }
+        
+        // Start a new timer for the blinking alliance color
+        animationTimer = new java.util.Timer();
+        animationTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                double currentTime = Timer.getFPGATimestamp();
+                
+                // Switch phases if enough time has passed
+                if (currentTime - blinkLastChangeTime >= BLINK_INTERVAL_FAST) {
+                    blinkIsOn = !blinkIsOn;
+                    blinkLastChangeTime = currentTime;
+                }
+                
+                if (blinkIsOn) {
+                    ledBar.setData(led_purple);
+                } else {
+                    // Turn off (black)
+                    ledBar.setData(led_blank);
+                }
+            }
+        }, 0, 20); // Start immediately, update every 20ms (50 Hz)
+    }
+
+
     public static void breathAllianceSolid(){
         // Stop any existing animation
         if (animationTimer != null) {
@@ -385,7 +446,7 @@ public class LedSubsystem extends SubsystemBase {
                 // Set LED pattern: green block at current position, black elsewhere
                 for (int i = 0; i < LEDConstants.ledLength; i++) {
                     if (i >= scrollPosition && i < scrollPosition + blockSize && i < LEDConstants.ledLength) {
-                        scroll_buffer.setLED(i, Color.kDarkViolet);
+                        scroll_buffer.setLED(i, Color.kGold);
                     } else {
                         scroll_buffer.setLED(i, Color.kBlack);
                     }

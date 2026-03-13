@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 
 public class OscillatedPulseAndIntakeCommand extends Command{
     
     private IntakeSubsystem intakeSubsystem;
-    private double targetPosition = IntakeConstants.kIntakeFinalPosition - 7;
 
     private final double pulseDutyCycle = 0.5;
     private final double pulseDuration = 0.4;
@@ -32,7 +32,7 @@ public class OscillatedPulseAndIntakeCommand extends Command{
 
     @Override
     public void initialize() {
-        intakeSubsystem.setIntakePosition(targetPosition);
+        LedSubsystem.breathAllianceSolid();
         timer.reset();
         timer.start();
 
@@ -88,6 +88,7 @@ public class OscillatedPulseAndIntakeCommand extends Command{
 
     @Override
     public void end(boolean canceled) {
+        LedSubsystem.setAllianceSolid();
         timer.stop();
 
         intakeSubsystem.setIntakePosition(25);

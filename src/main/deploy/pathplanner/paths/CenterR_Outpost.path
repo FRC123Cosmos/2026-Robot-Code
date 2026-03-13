@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.293102564102565,
-        "y": 2.895435897435898
+        "x": 2.65,
+        "y": 3.14
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0147470505977891,
-        "y": 1.402777836944202
+        "x": 1.3716444864952242,
+        "y": 1.6473419395083042
       },
       "isLocked": false,
       "linkedName": "CenterR_Start"
@@ -47,7 +47,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "intakeOut",
+      "name": "IntakeOut",
       "waypointRelativePos": 0.24173748819640714,
       "endWaypointRelativePos": null,
       "command": null
@@ -69,7 +69,7 @@
   "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 34.87532834460217
+    "rotation": 28.937374806090716
   },
   "useDefaultConstraints": true
 }

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.3396410256410265,
-        "y": 0.9884102564102579
+        "x": 3.11870512820513,
+        "y": 0.8837564102564113
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.499522264560929,
-        "y": 1.0370658851212062
+        "x": 1.2785863671250324,
+        "y": 0.9324120389673596
       },
       "isLocked": false,
       "linkedName": "RightT_Return(NZ)"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 1.0605128205128216,
-        "y": 2.8721794871794875
+        "x": 1.062,
+        "y": 2.92
       },
       "prevControl": {
-        "x": 1.0431001111437281,
-        "y": 2.6227866293177846
+        "x": 1.0445872906309066,
+        "y": 2.670607142138297
       },
       "nextControl": null,
       "isLocked": false,
@@ -66,7 +66,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,
@@ -83,7 +90,7 @@
   "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 68.19859051364811
+    "rotation": 61.2602047083119
   },
   "useDefaultConstraints": true
 }

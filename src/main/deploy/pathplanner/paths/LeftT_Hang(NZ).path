@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.2815000000000016,
-        "y": 7.058333333327624
+        "x": 3.1884743589743607,
+        "y": 7.221128205128204
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8070043519400056,
-        "y": 7.170396547179026
+        "x": 2.7139787109143647,
+        "y": 7.333191418979606
       },
       "isLocked": false,
       "linkedName": "LeftT_Return(NZ)"
@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 1.0714141674416178,
-        "y": 4.6032959837267065
+        "x": 1.06,
+        "y": 4.55
       },
       "prevControl": {
-        "x": 1.3740079173546362,
-        "y": 5.315924813184768
+        "x": 1.3625937499130185,
+        "y": 5.262628829458062
       },
       "nextControl": null,
       "isLocked": false,
@@ -86,7 +86,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,

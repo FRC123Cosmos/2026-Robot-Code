@@ -2,9 +2,9 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class AgitatedPulseAndShootCommand extends Command{
@@ -60,7 +60,11 @@ public class AgitatedPulseAndShootCommand extends Command{
         shooterSubsystem.setShooterVelocity(shootSpeed);
 
         if (isFar) {
+            LedSubsystem.blinkAllianceSolidSlow();
             hoodSubsystem.setHoodPosition(3.4);
+        } else {
+            hoodSubsystem.setHoodPosition(-0.11);
+            LedSubsystem.blinkAllianceSolidFast();
         }
     }
 
@@ -112,7 +116,8 @@ public class AgitatedPulseAndShootCommand extends Command{
         intakeSubsystem.setIndexer(0.0);
         timer.stop();
 
-        hoodSubsystem.setHoodPosition(0.00);
+        LedSubsystem.setAllianceSolid();
+        // hoodSubsystem.setHoodPosition(-0.1);
 
         if (stow) {
             intakeSubsystem.setIntakePosition(10);

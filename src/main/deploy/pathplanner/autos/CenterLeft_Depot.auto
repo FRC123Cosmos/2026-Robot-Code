@@ -17,22 +17,48 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.0
+                  "waitTime": 2.0
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Shoot"
+                  "name": "ShootClose"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "CenterL_DepotIntake"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CenterL_DepotIntake"
+                }
+              },
+              {
+                "type": "race",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "OscillateIntake"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 4.22
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -48,13 +74,51 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 2.5
+                  "waitTime": 2.0
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AgitatedShoot"
+                  "name": "AgitatedShootClose"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.3
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "UnjamHopper"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 2.7
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AgitatedShootClose"
                 }
               }
             ]
@@ -63,13 +127,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterL_Hang"
+            "pathName": "CenterL_Hang(Direct)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "lowerWinch"
+            "name": "LowerWinch"
           }
         }
       ]

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.3396410256410265,
-        "y": 0.9884102564102579
+        "x": 3.11870512820513,
+        "y": 0.8837564102564113
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9146878541273002,
-        "y": 1.0719043017569323
+        "x": 3.6937519566914037,
+        "y": 0.9672504556030856
       },
       "isLocked": false,
       "linkedName": "RightT_Return(NZ)"
@@ -62,7 +62,7 @@
   "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 68.19859051364811
+    "rotation": 61.2602047083119
   },
   "useDefaultConstraints": true
 }

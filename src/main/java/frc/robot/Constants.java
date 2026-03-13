@@ -88,8 +88,8 @@ public final class Constants {
 
     public static final class LEDConstants {
         public static final int kLEDBarPWM = 9;
-        public static final int ledLength = 40;
-        public static final int ledBufferLength = 40;
+        public static final int ledLength = 46;
+        public static final int ledBufferLength = 46;
     }
 
     public static final class AutoConstants {
@@ -158,6 +158,9 @@ public final class Constants {
         public static final double cameraHeight = .22; // z (height) in meters
         public static final double cameraYawOffset = 0;
         public static final double cameraPitch = 0; // Pitch angle in degrees
+
+        public static final double shortShootDistanceX = 1.4;
+        public static final double LongShootDistanceX = 2.8;
     }
 
     public static final class ShooterConstants {
@@ -186,7 +189,7 @@ public final class Constants {
         public static final double kIntakeFinalPosition = 112;
 
         public static final double indexerSpeed = 0.8;
-        public static final double intakeSpeed = 0.65;
+        public static final double intakeSpeed = 0.85; //0.65
         public static final double intakeRollerAgitationSpeed = 0.2;
 
         public static final double indexerPulseSpeed = 0.8;
@@ -199,10 +202,10 @@ public final class Constants {
 
         public static final double kWinchGearReduction = 75;
 
-        public static final double kWinchPositionDeadband = 0.2;
+        public static final double kWinchPositionDeadband = 0.1;
 
         public static final double kWinchBottomPosition = 0;
-        public static final double kWinchTopPosition = 5.5;
+        public static final double kWinchTopPosition = 5.25;
     }
 
     public static final class HoodConstants {

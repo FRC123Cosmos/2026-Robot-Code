@@ -1,0 +1,75 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.0,
+        "y": 7.418807692307692
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.4907820512820535,
+        "y": 7.0350769230769234
+      },
+      "isLocked": false,
+      "linkedName": "LeftT_Start(NZV2-StartingPoint)"
+    },
+    {
+      "anchor": {
+        "x": 0.7814358974358988,
+        "y": 6.442038461538462
+      },
+      "prevControl": {
+        "x": 2.6535769230769235,
+        "y": 7.104846153846155
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "LeftT_Start(Depot)"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.8256285482562853,
+      "maxWaypointRelativePos": 0.9845904298459045,
+      "constraints": {
+        "maxVelocity": 0.45,
+        "maxAcceleration": 0.3,
+        "maxAngularVelocity": 360.0,
+        "maxAngularAcceleration": 180.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0.5,
+    "rotation": -148.1340223063963
+  },
+  "reversed": false,
+  "folder": "Left",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

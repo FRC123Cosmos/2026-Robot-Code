@@ -5,13 +5,19 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "LeftT_Turn(NZ)"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "Shoot"
+                  "name": "ShootFar"
                 }
               },
               {
@@ -30,7 +36,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -40,9 +46,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "OscillateIntake"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "OscillateIntake"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 5.0
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -55,13 +74,51 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AgitatedShoot"
+                  "name": "AgitatedShootFar"
                 }
               },
               {
                 "type": "wait",
                 "data": {
                   "waitTime": 2.0
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "UnjamHopper"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AgitatedShootFar"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 3.0
                 }
               }
             ]
@@ -76,7 +133,7 @@
         {
           "type": "named",
           "data": {
-            "name": "lowerWinch"
+            "name": "LowerWinch"
           }
         }
       ]

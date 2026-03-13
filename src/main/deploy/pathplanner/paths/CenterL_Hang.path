@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5932750603081405,
-        "y": 5.234114219271185
+        "x": 1.444243589743591,
+        "y": 5.255961538461538
       },
       "isLocked": false,
       "linkedName": "Shoot2_EndPoint"
     },
     {
       "anchor": {
-        "x": 1.0714141674416178,
-        "y": 4.6032959837267065
+        "x": 1.06,
+        "y": 4.55
       },
       "prevControl": {
-        "x": 1.0519838026553976,
-        "y": 5.162868029092925
+        "x": 1.1303288449117899,
+        "y": 5.096636207771098
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,

@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.478977771774526,
-        "y": 7.28240289206701
+        "x": 4.261770878163302,
+        "y": 7.432094279327463
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZ)-Init"
@@ -20,39 +20,16 @@
         "y": 7.418807692307692
       },
       "prevControl": {
-        "x": 5.605746718724247,
-        "y": 7.446886156363159
+        "x": 5.612961659333374,
+        "y": 7.419053529453937
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "LeftT_Sweep(Init)"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": -78.40782458970901
-    },
-    {
-      "waypointRelativePos": 0.75,
-      "rotationDegrees": -83.65980825409024
-    }
-  ],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.75,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 0.2,
-        "maxAngularVelocity": 360.0,
-        "maxAngularAcceleration": 180.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "rotationTargets": [],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -65,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 1.5,
-    "rotation": -83.0887728809756
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -80.0
+    "rotation": -75.0
   },
   "useDefaultConstraints": true
 }

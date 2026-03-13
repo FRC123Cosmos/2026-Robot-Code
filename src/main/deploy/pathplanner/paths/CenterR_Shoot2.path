@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0461361742406496,
-        "y": 1.499267578071069
+        "x": 0.7851185393375949,
+        "y": 1.4476449247491212
       },
       "isLocked": false,
       "linkedName": "CenterR_Outpost"
     },
     {
       "anchor": {
-        "x": 1.6535512820552078,
-        "y": 1.9768076923059401
+        "x": 1.644,
+        "y": 1.967
       },
       "prevControl": {
-        "x": 0.9153811397312647,
-        "y": 1.0773545016934363
+        "x": 1.09987386213708,
+        "y": 1.1982649215479468
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,8 +30,26 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [],
-  "eventMarkers": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.63,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.946175637393771,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0.7861811391223126,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,
@@ -42,7 +60,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 40.89200928967827
+    "rotation": 40.42061894673249
   },
   "reversed": false,
   "folder": "Center",

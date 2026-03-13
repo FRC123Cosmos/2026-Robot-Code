@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
-import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,8 +34,9 @@ public class WinchSubsystem extends SubsystemBase{
         ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         kWinchController = winchFlex.getClosedLoopController();
-
         winchEncoder = winchFlex.getEncoder();
+
+        winchEncoder.setPosition(0.0);
 
         targetPosition = 0; 
     }
@@ -48,8 +49,8 @@ public class WinchSubsystem extends SubsystemBase{
         return winchEncoder.getPosition();
     }
 
-    public boolean atPosition(){
-        return Math.abs(getPos() - targetPosition) < WinchConstants.kWinchPositionDeadband;
+    public boolean atTopPosition(){
+        return Math.abs(getPos() - 5.3) < WinchConstants.kWinchPositionDeadband;
     }
 
 
@@ -74,6 +75,6 @@ public class WinchSubsystem extends SubsystemBase{
         kWinchController.setSetpoint(targetPosition, ControlType.kPosition);
 
         SmartDashboard.putNumber("Winch Pos", getPos());
+        SmartDashboard.putNumber("Winch Target Pos", targetPosition);
     }
-
 }

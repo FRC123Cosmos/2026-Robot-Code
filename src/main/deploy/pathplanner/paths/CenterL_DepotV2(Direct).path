@@ -1,0 +1,122 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5838333333333345,
+        "y": 4.186166666666668
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.48764460308253,
+        "y": 4.55616242703408
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.156471153846155,
+        "y": 4.818450320512822
+      },
+      "prevControl": {
+        "x": 2.4208145372743712,
+        "y": 4.804284487646235
+      },
+      "nextControl": {
+        "x": 1.1475587618896246,
+        "y": 4.872516679716268
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.4674743589743602,
+        "y": 4.953628205128206
+      },
+      "prevControl": {
+        "x": 0.5023589743589756,
+        "y": 4.5698974358974365
+      },
+      "nextControl": {
+        "x": 0.4448404224637306,
+        "y": 5.202601506745131
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.4674743589743602,
+        "y": 6.058307692307692
+      },
+      "prevControl": {
+        "x": 0.4791025641025657,
+        "y": 5.523410256410257
+      },
+      "nextControl": {
+        "x": 0.461636689942408,
+        "y": 6.326840467777487
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.4674743589743602,
+        "y": 7.0234487179487175
+      },
+      "prevControl": {
+        "x": 0.4680584164826964,
+        "y": 6.317312214540023
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "CenterL_DepotV2"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 39.19088805598516
+    },
+    {
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": 90.0
+    },
+    {
+      "waypointRelativePos": 3,
+      "rotationDegrees": 90.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0.3,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 90.0
+  },
+  "reversed": false,
+  "folder": "Center",
+  "idealStartingState": {
+    "velocity": 0.2,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

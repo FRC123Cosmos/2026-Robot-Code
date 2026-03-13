@@ -3,32 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6535512820552078,
-        "y": 1.9768076923059401
+        "x": 1.644,
+        "y": 1.967
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9295002225542963,
-        "y": 2.0999266946755366
+        "x": 0.9199489404990884,
+        "y": 2.0901190023695966
       },
       "isLocked": false,
       "linkedName": "CenterR_Shoot2"
     },
     {
       "anchor": {
-        "x": 1.0605128205128216,
-        "y": 2.8721794871794875
+        "x": 1.062,
+        "y": 2.92
       },
       "prevControl": {
-        "x": 1.0605128205128216,
-        "y": 2.3123989242490692
+        "x": 1.062,
+        "y": 2.3602194370695817
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Right_Hang"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7951070336391585,
+      "rotationDegrees": -90.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
@@ -45,7 +50,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,
@@ -62,7 +74,7 @@
   "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 40.89200928967827
+    "rotation": 40.42061894673249
   },
   "useDefaultConstraints": true
 }

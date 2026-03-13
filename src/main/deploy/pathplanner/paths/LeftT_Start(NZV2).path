@@ -12,7 +12,7 @@
         "y": 7.378978375880047
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LeftT_Start(NZV2-StartingPoint)"
     },
     {
       "anchor": {
@@ -103,7 +103,7 @@
   "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -89.69836293315844
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

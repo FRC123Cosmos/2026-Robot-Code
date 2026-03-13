@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.0,
+        "y": 0.6368629770113694
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.7396188894229274,
+        "y": 0.6411539532874861
+      },
+      "isLocked": false,
+      "linkedName": "RightT_Start(NZV2)-Init"
+    },
+    {
+      "anchor": {
+        "x": 4.0,
+        "y": 0.6395641025641032
+      },
+      "prevControl": {
+        "x": 4.312256564843433,
+        "y": 0.6872096896968752
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "RightT_Start(NZ)_StartingPoint"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 75.0
+  },
+  "reversed": false,
+  "folder": "Right",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.0
+  },
+  "useDefaultConstraints": true
+}

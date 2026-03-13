@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5605769230769244,
+        "x": 3.5838333333333345,
         "y": 4.186166666666668
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.157573445860981,
-        "y": 4.414600856792043
+        "x": 3.47173370548499,
+        "y": 4.459779129561808
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.4093846153846163,
+        "x": 2.65,
         "y": 4.860602564102565
       },
       "prevControl": {
-        "x": 3.525263847148853,
-        "y": 4.165597791555558
+        "x": 2.940900142189874,
+        "y": 4.315354863843745
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +30,18 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.625,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.8914069877242732,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "RaiseWinch",
@@ -49,7 +60,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -16.389540334034777
+    "rotation": -21.540975918538525
   },
   "reversed": false,
   "folder": "Center",

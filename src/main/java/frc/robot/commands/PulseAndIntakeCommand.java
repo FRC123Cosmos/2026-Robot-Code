@@ -4,20 +4,21 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 
 public class PulseAndIntakeCommand extends Command{
+
     private IntakeSubsystem intakeSubsystem;
     private double targetPosition = IntakeConstants.kIntakeFinalPosition - 7;
 
-    private final double pulseDutyCycle = 0.8;
+    private final double pulseDutyCycle = 0.5;
     private final double pulseDuration = 0.4;
-    private final double restDuration = 0.1;
+    private final double restDuration = 0.15;
 
     private final Timer timer = new Timer();
 
     private boolean isPulsing = true;
     private double lastSpeed = Double.NaN;
-
 
     public PulseAndIntakeCommand(IntakeSubsystem intakeSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
@@ -26,6 +27,7 @@ public class PulseAndIntakeCommand extends Command{
 
     @Override
     public void initialize() {
+        LedSubsystem.breathAllianceSolid();
         intakeSubsystem.setIntakePosition(targetPosition);
         timer.reset();
         timer.start();
@@ -36,6 +38,7 @@ public class PulseAndIntakeCommand extends Command{
 
     @Override
     public void execute() {
+
         intakeSubsystem.setIntakeRoller(IntakeConstants.intakeSpeed);
 
         double elapsedTime = timer.get();
@@ -61,10 +64,12 @@ public class PulseAndIntakeCommand extends Command{
 
     @Override
     public void end(boolean canceled) {
+        LedSubsystem.setAllianceSolid();
         timer.stop();
+
+        intakeSubsystem.setIntakePosition(25);
 
         intakeSubsystem.setIntakeRoller(0.0);
         intakeSubsystem.setIndexer(0.0);
     }
-
 }
