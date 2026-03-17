@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.751173614769412,
-        "y": 7.443003353345964
+        "x": 3.7511881885913874,
+        "y": 7.443152763750696
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZV2-StartingPoint)"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 4.0,
-        "y": 7.418807692307692
+        "y": 7.47
       },
       "prevControl": {
-        "x": 4.27966707882578,
-        "y": 7.39173557920109
+        "x": 4.2790086436095285,
+        "y": 7.462820349878644
       },
       "nextControl": null,
       "isLocked": false,

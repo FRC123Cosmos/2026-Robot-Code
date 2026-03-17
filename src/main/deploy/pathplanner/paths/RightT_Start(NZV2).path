@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 4.0,
-        "y": 0.6395641025641032
+        "y": 0.59
       },
       "prevControl": null,
       "nextControl": {
         "x": 7.076411757734407,
-        "y": 0.6796420350615037
+        "y": 0.6300779324974004
       },
       "isLocked": false,
       "linkedName": "RightT_Start(NZ)_StartingPoint"

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.0,
-        "y": 7.47
+        "x": 0.7232948717948733,
+        "y": 5.337358974358974
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.261770878163302,
-        "y": 7.48328658701977
+        "x": 0.9674871794871811,
+        "y": 5.035025641025641
       },
       "isLocked": false,
-      "linkedName": "LeftT_Start(NZ)-Init"
+      "linkedName": "Depot_EndPoint"
     },
     {
       "anchor": {
-        "x": 5.86296153846154,
-        "y": 7.418807692307692
+        "x": 2.65,
+        "y": 4.860602564102565
       },
       "prevControl": {
-        "x": 5.612961659333374,
-        "y": 7.419053529453937
+        "x": 1.3861025641025657,
+        "y": 4.96525641025641
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "LeftT_Sweep(Init)"
+      "linkedName": "CenterL_Start"
     }
   ],
   "rotationTargets": [],
@@ -41,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 1.5,
-    "rotation": -90.0
+    "velocity": 0,
+    "rotation": -21.540975918538525
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": "Center",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -75.0
+    "rotation": 130.91438322002514
   },
   "useDefaultConstraints": true
 }

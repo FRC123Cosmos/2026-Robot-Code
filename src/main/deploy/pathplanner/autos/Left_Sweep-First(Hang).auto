@@ -5,41 +5,42 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "LeftT_Turn(NZ)"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LeftT_Start(Sweep)"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftT_Sweep"
+                  "pathName": "LeftT_Sweep(Direct)"
                 }
               },
               {
-                "type": "race",
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "OscillateIntake"
+                        "waitTime": 1.1
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "race",
                       "data": {
-                        "waitTime": 5.5
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 5.54
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "OscillateIntake"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -61,7 +62,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 2.5
+                  "waitTime": 4.0
                 }
               }
             ]
@@ -80,7 +81,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
+                  "waitTime": 0.25
                 }
               }
             ]
@@ -99,7 +100,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.0
+                  "waitTime": 3.25
                 }
               }
             ]

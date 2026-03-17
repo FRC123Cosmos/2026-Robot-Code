@@ -8,27 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.800480828746867,
-        "y": 6.528136655445471
+        "x": 6.036814116908419,
+        "y": 5.689985397194794
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZ)"
-    },
-    {
-      "anchor": {
-        "x": 7.1769487179487195,
-        "y": 6.662974358974359
-      },
-      "prevControl": {
-        "x": 7.694051630287628,
-        "y": 5.844599371511497
-      },
-      "nextControl": {
-        "x": 6.864715536388001,
-        "y": 7.157119373338101
-      },
-      "isLocked": false,
-      "linkedName": null
     },
     {
       "anchor": {
@@ -36,28 +20,28 @@
         "y": 7.337410256410257
       },
       "prevControl": {
-        "x": 5.99915738651653,
-        "y": 7.28131927928634
+        "x": 6.425455626208029,
+        "y": 7.095019867876667
       },
       "nextControl": {
-        "x": 5.20576824039185,
-        "y": 7.436182805897487
+        "x": 5.0710842947840975,
+        "y": 7.555023575818478
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.0257051282051295,
-        "y": 7.476948717948718
+        "x": 4.04896153846154,
+        "y": 7.337410256410257
       },
       "prevControl": {
-        "x": 4.390972114300814,
-        "y": 7.49668854909211
+        "x": 4.298149802482344,
+        "y": 7.317280450790282
       },
       "nextControl": {
-        "x": 3.534539783519412,
-        "y": 7.450405062659153
+        "x": 3.5670940955549493,
+        "y": 7.37633623873298
       },
       "isLocked": false,
       "linkedName": null
@@ -68,8 +52,8 @@
         "y": 7.221128205128204
       },
       "prevControl": {
-        "x": 3.5166691211750476,
-        "y": 7.382229839440999
+        "x": 4.150169763308201,
+        "y": 7.142635563745942
       },
       "nextControl": null,
       "isLocked": false,
@@ -78,15 +62,11 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -169.31508759999738
-    },
-    {
-      "waypointRelativePos": 2.0,
+      "waypointRelativePos": 1.0,
       "rotationDegrees": 174.0531369453569
     },
     {
-      "waypointRelativePos": 3.0,
+      "waypointRelativePos": 2.0,
       "rotationDegrees": 179.4694986833262
     }
   ],
@@ -95,7 +75,7 @@
   "eventMarkers": [
     {
       "name": "intakeIn",
-      "waypointRelativePos": 1.2,
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": null
     }

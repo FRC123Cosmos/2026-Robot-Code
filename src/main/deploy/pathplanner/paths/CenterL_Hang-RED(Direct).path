@@ -3,61 +3,61 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8047179487179497,
-        "y": 7.116474358974359
+        "x": 2.65,
+        "y": 4.860602564102565
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4683307285096279,
-        "y": 6.534204993147511
+        "x": 1.4925853221937049,
+        "y": 5.1066373292773255
       },
       "isLocked": false,
-      "linkedName": "LeftT_Shoot(Depot)"
+      "linkedName": "CenterL_Start"
     },
     {
       "anchor": {
-        "x": 1.1767948717948733,
-        "y": 5.151307692307693
+        "x": 1.0434977180509848,
+        "y": 4.860602564102565
       },
       "prevControl": {
-        "x": 1.5023846153846168,
-        "y": 6.430410256410258
+        "x": 1.0391059345089122,
+        "y": 5.110563985600602
       },
       "nextControl": {
-        "x": 1.1151250516361395,
-        "y": 4.909033398826953
+        "x": 1.0478895015930574,
+        "y": 4.6106411426045275
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.06,
-        "y": 4.55
+        "x": 1.0434977180509848,
+        "y": 4.515625300625817
       },
       "prevControl": {
-        "x": 1.0674722489803268,
-        "y": 4.908766112591429
+        "x": 1.097704428678467,
+        "y": 4.8654383847687965
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Left_Hang"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 90.0
+      "rotationDegrees": 90.46448336861968
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.6772100567721033,
+      "minWaypointRelativePos": 1.4484412470023882,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 0.4,
+        "maxVelocity": 0.4,
+        "maxAcceleration": 0.3,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 180.0,
         "nominalVoltage": 12.0,
@@ -66,7 +66,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,
@@ -80,10 +87,10 @@
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": "Left",
+  "folder": "Center",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -52.85331330197825
+    "velocity": 0.5,
+    "rotation": -21.540975918538525
   },
   "useDefaultConstraints": true
 }

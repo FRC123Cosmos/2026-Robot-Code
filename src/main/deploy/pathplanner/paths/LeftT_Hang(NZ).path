@@ -8,40 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.7139787109143647,
-        "y": 7.333191418979606
+        "x": 1.6586111375315409,
+        "y": 6.528395139425877
       },
       "isLocked": false,
       "linkedName": "LeftT_Return(NZ)"
     },
     {
       "anchor": {
-        "x": 2.477743249032643,
-        "y": 6.819918907629218
+        "x": 1.06,
+        "y": 4.709435897435898
       },
       "prevControl": {
-        "x": 2.799614214073059,
-        "y": 6.900479650804731
+        "x": 1.0813354830332136,
+        "y": 4.958523828022146
       },
       "nextControl": {
-        "x": 1.636062471036656,
-        "y": 6.609255516529665
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.651845986326514,
-        "y": 5.858257711327562
-      },
-      "prevControl": {
-        "x": 1.7657045827284992,
-        "y": 6.094728767943637
-      },
-      "nextControl": {
-        "x": 0.7664081696135912,
-        "y": 4.019306391861935
+        "x": 1.0386645169667865,
+        "y": 4.46034796684965
       },
       "isLocked": false,
       "linkedName": null
@@ -52,8 +36,8 @@
         "y": 4.55
       },
       "prevControl": {
-        "x": 1.3625937499130185,
-        "y": 5.262628829458062
+        "x": 1.1263736311055823,
+        "y": 4.791028091918474
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,18 +47,14 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -20.27532152276733
-    },
-    {
-      "waypointRelativePos": 2,
-      "rotationDegrees": 36.569705307965044
+      "rotationDegrees": 90.2965249815124
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 2.241293532338302,
-      "maxWaypointRelativePos": 3.0,
+      "minWaypointRelativePos": 1.2,
+      "maxWaypointRelativePos": 2.0,
       "constraints": {
         "maxVelocity": 0.5,
         "maxAcceleration": 0.25,

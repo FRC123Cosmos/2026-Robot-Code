@@ -1,0 +1,162 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.0,
+        "y": 7.418807692307692
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.758333333333335,
+        "y": 7.128102564102565
+      },
+      "isLocked": false,
+      "linkedName": "LeftT_Start(NZV2-StartingPoint)"
+    },
+    {
+      "anchor": {
+        "x": 8.665358974358975,
+        "y": 7.0350769230769234
+      },
+      "prevControl": {
+        "x": 8.21732172504269,
+        "y": 7.9170035953447835
+      },
+      "nextControl": {
+        "x": 8.935361723217136,
+        "y": 6.503597395053232
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.83978205128205,
+        "y": 4.44198717948718
+      },
+      "prevControl": {
+        "x": 8.661538717592006,
+        "y": 6.9395085446889215
+      },
+      "nextControl": {
+        "x": 8.935136142386606,
+        "y": 3.1058986152598687
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.386282051282052,
+        "y": 1.8372692307692309
+      },
+      "prevControl": {
+        "x": 9.011940847554776,
+        "y": 3.1470801395331858
+      },
+      "nextControl": {
+        "x": 8.011886431755642,
+        "y": 1.0534754607934103
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.432717948717949,
+        "y": 0.6279358974358968
+      },
+      "prevControl": {
+        "x": 6.977260405925799,
+        "y": 0.6378659259606678
+      },
+      "nextControl": {
+        "x": 5.182723115234682,
+        "y": 0.6263286539341404
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.269897435897438,
+        "y": 0.6279358974358968
+      },
+      "prevControl": {
+        "x": 4.902966337588342,
+        "y": 0.6918674016568231
+      },
+      "nextControl": {
+        "x": 4.01171747079014,
+        "y": 0.6018631690410422
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.04893589743477,
+        "y": 0.9186410256398607
+      },
+      "prevControl": {
+        "x": 4.276986547273328,
+        "y": 0.5959055907051032
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "LeftT_Sweep"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": -98.53076561009166
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": -103.671307132691
+    },
+    {
+      "waypointRelativePos": 3,
+      "rotationDegrees": -127.47617956199117
+    },
+    {
+      "waypointRelativePos": 4,
+      "rotationDegrees": -179.2461516669293
+    },
+    {
+      "waypointRelativePos": 5,
+      "rotationDegrees": 180.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 5.18980169971671,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 61.50436138175499
+  },
+  "reversed": false,
+  "folder": "Left",
+  "idealStartingState": {
+    "velocity": 1.5,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

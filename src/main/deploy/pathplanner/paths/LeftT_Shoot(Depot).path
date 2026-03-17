@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7096652342353793,
-        "y": 6.313791336076954
+        "x": 1.5803716980592792,
+        "y": 6.402756483767123
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(Depot)"
     },
     {
       "anchor": {
-        "x": 2.1303076923076936,
-        "y": 6.825769230769231
+        "x": 1.8047179487179497,
+        "y": 7.116474358974359
       },
       "prevControl": {
-        "x": 0.9367702926645751,
-        "y": 6.35921919166282
+        "x": 0.3846924555093667,
+        "y": 6.490855714749178
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -49.39870535499543
+    "rotation": -52.85331330197825
   },
   "reversed": false,
   "folder": "Left",

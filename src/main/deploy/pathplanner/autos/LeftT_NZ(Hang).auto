@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "LeftT_Turn(NZ)"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftT_Start(NZ)"
+                  "pathName": "LeftT_Start_(NZ)"
                 }
               },
               {
@@ -27,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.36
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -43,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 2.5
+                              "waitTime": 3.06
                             }
                           }
                         ]
@@ -74,7 +68,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.5
+                  "waitTime": 4.0
                 }
               }
             ]
@@ -93,7 +87,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
+                  "waitTime": 0.25
                 }
               }
             ]
@@ -112,7 +106,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.5
+                  "waitTime": 3.0
                 }
               }
             ]

@@ -8,36 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2088171363546723,
-        "y": 0.967296654350809
+        "x": 1.064435738331754,
+        "y": 1.0421959822523235
       },
       "isLocked": false,
       "linkedName": "LeftT_Sweep"
     },
     {
       "anchor": {
-        "x": 1.3759278846161125,
-        "y": 1.5392964743589745
+        "x": 1.0626804353146266,
+        "y": 2.5117051282051284
       },
       "prevControl": {
-        "x": 1.7514379468429035,
-        "y": 1.075046390821171
+        "x": 1.535401709718509,
+        "y": 1.4064864789534264
       },
       "nextControl": {
-        "x": 1.2187071120455935,
-        "y": 1.733671443612552
+        "x": 0.9643664751244762,
+        "y": 2.7415623996405336
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.062,
-        "y": 2.92
+        "x": 1.0626804353146266,
+        "y": 2.9463519401695453
       },
       "prevControl": {
-        "x": 1.0445872906309066,
-        "y": 2.670607142138297
+        "x": 1.1566468124456877,
+        "y": 2.7146833838895374
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,13 +47,13 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -47.37605521806814
+      "rotationDegrees": -91.43209618416462
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.78,
+      "minWaypointRelativePos": 1.6381461675579312,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
         "maxVelocity": 0.3,
