@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.863012820512822,
-        "y": 2.221
+        "x": 7.8397564102564115,
+        "y": 3.302423076923077
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.061348463950292,
-        "y": 2.066006620886635
+        "x": 6.664093839712856,
+        "y": 2.505757512882763
       },
       "isLocked": false,
-      "linkedName": "RightT_Start(NZ)"
+      "linkedName": "RightT_Start_(NZ.V2)"
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 0.6628205128205127
       },
       "prevControl": {
-        "x": 6.534892043623797,
-        "y": 0.68630485144893
+        "x": 6.6281550794974144,
+        "y": 0.7084257401210344
       },
       "nextControl": {
-        "x": 4.5276330579374,
-        "y": 0.6306080945230048
+        "x": 4.571945214235771,
+        "y": 0.6086255487551885
       },
       "isLocked": false,
       "linkedName": null
@@ -36,12 +36,12 @@
         "y": 0.6628205128205127
       },
       "prevControl": {
-        "x": 4.81441342670868,
-        "y": 0.6932574335709384
+        "x": 4.797639746586098,
+        "y": 0.679173381948666
       },
       "nextControl": {
-        "x": 3.706092877453308,
-        "y": 0.6539624449737061
+        "x": 3.70297807325142,
+        "y": 0.6579059740572557
       },
       "isLocked": false,
       "linkedName": null
@@ -52,8 +52,8 @@
         "y": 0.7907307692307699
       },
       "prevControl": {
-        "x": 3.7132103129004426,
-        "y": 0.7813554403611661
+        "x": 3.7024032604485133,
+        "y": 0.7729292522335273
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,7 +63,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0,
-      "rotationDegrees": 180.0
+      "rotationDegrees": 174.4789060751678
     },
     {
       "waypointRelativePos": 2.0,
@@ -75,7 +75,7 @@
   "eventMarkers": [
     {
       "name": "RaiseWinch",
-      "waypointRelativePos": 2.69705093833784,
+      "waypointRelativePos": 2.353887399463827,
       "endWaypointRelativePos": null,
       "command": null
     }

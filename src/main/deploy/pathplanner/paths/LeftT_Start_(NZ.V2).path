@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.7323408906875315,
-        "y": 7.5521138171668785
+        "x": 5.715166999090569,
+        "y": 7.469372554409972
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZV2-StartingPoint)"
     },
     {
       "anchor": {
-        "x": 7.8397564102564115,
-        "y": 6.837397435894942
+        "x": 6.002500000000001,
+        "y": 7.418807692307692
       },
       "prevControl": {
-        "x": 7.855812831929918,
-        "y": 7.340895308007536
+        "x": 5.483036860909806,
+        "y": 7.396172940178612
       },
       "nextControl": {
-        "x": 7.778745752400591,
-        "y": 4.924222942148241
+        "x": 7.200421669468389,
+        "y": 7.471005159304024
       },
       "isLocked": false,
       "linkedName": null
@@ -33,31 +33,47 @@
     {
       "anchor": {
         "x": 7.8397564102564115,
-        "y": 5.82574358974359
+        "y": 7.116474358974359
       },
       "prevControl": {
-        "x": 7.950701277739638,
-        "y": 6.443163417415226
+        "x": 7.835566757310833,
+        "y": 7.501336283298315
+      },
+      "nextControl": {
+        "x": 7.877141229875418,
+        "y": 3.682301217196689
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.8397564102564115,
+        "y": 4.63
+      },
+      "prevControl": {
+        "x": 7.806428517091206,
+        "y": 4.877768544285122
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "LeftT_Start(NZ)"
+      "linkedName": "LeftT_Start(NZ.V2)"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 2,
       "rotationDegrees": -90.0
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.0509915014164193,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 2.2466487935656834,
+      "maxWaypointRelativePos": 3.0,
       "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 0.2,
+        "maxVelocity": 1.0,
+        "maxAcceleration": 0.75,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 180.0,
         "nominalVoltage": 12.0,

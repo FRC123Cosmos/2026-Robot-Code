@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.0,
-        "y": 7.418807692307692
+        "x": 4.4339344074208125,
+        "y": 7.606890242477919
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7511881885913874,
-        "y": 7.443152763750696
+        "x": 4.1851225960122,
+        "y": 7.631235313920922
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZV2-StartingPoint)"

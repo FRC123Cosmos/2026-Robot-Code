@@ -15,8 +15,8 @@ public class AgitatedPulseAndShootCommand extends Command{
     private double shootSpeed;
     private boolean stow;
 
-    private final double pulseDutyCycle = 0.6;
-    private final double pulseDuration = 0.5;
+    private final double pulseDutyCycle = 0.725; // .725
+    private final double pulseDuration = 0.5; // .5
     private final double restDuration = 0.15;
 
     private final double intakeHighPos = 10;
@@ -61,7 +61,7 @@ public class AgitatedPulseAndShootCommand extends Command{
 
         if (isFar) {
             LedSubsystem.blinkAllianceSolidSlow();
-            hoodSubsystem.setHoodPosition(3.4);
+            hoodSubsystem.setHoodPosition(3.35); // 3.4
         } else {
             hoodSubsystem.setHoodPosition(-0.11);
             LedSubsystem.blinkAllianceSolidFast();
@@ -76,8 +76,7 @@ public class AgitatedPulseAndShootCommand extends Command{
         boolean atTargetPos = Math.abs(
             (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 30;
 
-        shooterSubsystem.kickFuel(true);
-
+        shooterSubsystem.kickFuelRPM(true);
 
         if (atTargetPos && !wasAtTargetPos) {
             goingHigh = !goingHigh;
@@ -90,6 +89,7 @@ public class AgitatedPulseAndShootCommand extends Command{
         }
 
         wasAtTargetPos = atTargetPos;
+        intakeSubsystem.setIntakeRoller(0.65);
         
         if (isPulsing && elapsedTime >= pulseDuration) {
             speed = 0.0;
@@ -112,7 +112,7 @@ public class AgitatedPulseAndShootCommand extends Command{
     @Override
     public void end(boolean canceled) {
         shooterSubsystem.stopShooterSystem();
-        
+        intakeSubsystem.setIntakeRoller(0.0);
         intakeSubsystem.setIndexer(0.0);
         timer.stop();
 

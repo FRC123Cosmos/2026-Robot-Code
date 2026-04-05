@@ -92,13 +92,21 @@ public final class Configs {
                         .outputRange(-1, 1);
                 
                 kickerConfig
-                        .idleMode(IdleMode.kBrake)
+                        .idleMode(IdleMode.kCoast)
                         .smartCurrentLimit(40)
                         .voltageCompensation(12);
+                // kickerConfig.closedLoop
+                //         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+                //         .pid(0.7, 0, 0)
+                //         .outputRange(-0.7, 0.7);
+                kickerConfig.closedLoop.feedForward
+                        .kV(2e-4);
                 kickerConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(0.7, 0, 0)
-                        .outputRange(-0.7, 0.7);
+                        .pid(1.25e-4, 0, 0)
+                        .iZone(0.2)
+                        .outputRange(-1, 1);
+
                 }
         }
 
@@ -149,7 +157,7 @@ public final class Configs {
                                 .pid(0.002, 1e-5, 0)
                                 .iZone(0.1)
                                 // .outputRange(-0.8, 0.8);
-                                .outputRange(-0.1, 0.1);
+                                .outputRange(-0.2, 0.2);
 
                         intakeRollerConfigs
                                 .idleMode(IdleMode.kCoast)
@@ -184,7 +192,7 @@ public final class Configs {
                         .kV(9e-1);
                         winchConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(0.5, 1e-6, 0)
+                        .pid(0.75, 1e-6, 0) //.5
                         .iZone(0.1)
                         .outputRange(-1, 1);
 
@@ -205,7 +213,7 @@ public final class Configs {
                         .kV(9e-1);
                         winchFollowerConfig.closedLoop
                         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-                        .pid(0.5, 1e-6, 0)
+                        .pid(0.75, 1e-6, 0) //.5
                         .iZone(0.1)
                         .outputRange(-1, 1);
                 }

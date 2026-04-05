@@ -1,6 +1,8 @@
 package frc.robot;
 
 
+import static edu.wpi.first.units.Units.Seconds;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.events.EventTrigger;
@@ -11,18 +13,16 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AgitatedPulseAndShootCommand;
-import frc.robot.commands.AlignToTagCommand;
 import frc.robot.commands.DefaultDriveCommand;
 import frc.robot.commands.FaceTagCommand;
+import frc.robot.commands.IntakeAndShootCommand;
+import frc.robot.commands.IntakeAndShootFarCommand;
 import frc.robot.commands.OscillatedPulseAndIntakeCommand;
-import frc.robot.commands.PulseAndIntakeCommand;
 import frc.robot.commands.PulseAndShootCommand;
-import frc.robot.commands.TranslateToHubCommand;
 import frc.robot.commands.UnjamHopperCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HoodSubsystem;
@@ -31,6 +31,7 @@ import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.WinchSubsystem;
+import frc.robot.utils.HubTracker;
 
 public class RobotContainer {
 
@@ -54,6 +55,9 @@ public class RobotContainer {
 
   private double autoDelay;
 
+  private boolean isHubActive;
+  private String shift;
+
   
   public RobotContainer() {
 
@@ -69,13 +73,15 @@ public class RobotContainer {
     NamedCommands.registerCommand("LowerWinch", 
       new InstantCommand(() -> hood.setHoodPosition(-0.11))
       .andThen(new InstantCommand(() -> winch.setWinchPos(0.0))));
-    NamedCommands.registerCommand("UnjamHopper", new UnjamHopperCommand(shooter, intake));
+    NamedCommands.registerCommand("UnjamHopper", new UnjamHopperCommand(shooter, intake, false));
 
     // /* ----------------------------------------------PathPlanner Events----------------------------------------- */
 
     new EventTrigger("RaiseWinch").onTrue(new InstantCommand(() -> winch.setWinchPos(5.25)));
     new EventTrigger("IntakeOut").onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
     new EventTrigger("IntakeIn").onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+    // new EventTrigger("RevShooterClose").onTrue(new InstantCommand(() -> shooter.setShooterVelocity(2700)));
+    // new EventTrigger("RevShooterFar").onTrue(new InstantCommand(() -> shooter.setShooterVelocity(3000)));
 
     /* -------------------------------------------End of PathPlanner Block--------------------------------------- */
 
@@ -84,13 +90,25 @@ public class RobotContainer {
     autoPosition = new SendableChooser<AutoPos>();
     autoPosition.addOption("Left(Trench)", AutoPos.LeftT_NZ);
     autoPosition.addOption("Center", AutoPos.Center);
+    autoPosition.addOption("Center(Flipped)", AutoPos.Center_Flipped);
     autoPosition.addOption("Right(Trench)", AutoPos.RightT_NZ);
-    autoPosition.setDefaultOption("Center", AutoPos.Center);
+    autoPosition.setDefaultOption("Center(Flipped)", AutoPos.Center_Flipped);
     SmartDashboard.putData("Auto Pos", autoPosition);
 
-    autoChooser = AutoBuilder.buildAutoChooser("CenterLeft_Depot(Intake-First)");
+    autoChooser = AutoBuilder.buildAutoChooser("CenterLeft_Depot-Flipped(Intake-First)");
     SmartDashboard.putData("Auto Mode", autoChooser);
     SmartDashboard.putNumber("Auto Delay", 0);
+
+    isHubActive = HubTracker.isActive();
+    shift = HubTracker.getCurrentShift()
+      .map(Enum::name)
+      .orElse("None");
+    SmartDashboard.putString("Phase Status", 
+      shift + (isHubActive ? "(Friendly Active)" : "(Opponent Active)"));
+
+    
+    SmartDashboard.putBoolean("IsFriendlyActive", HubTracker.isActive());
+
   }
 
   private void configureBindings() {
@@ -106,23 +124,28 @@ public class RobotContainer {
     driverControllerCommand.y().whileTrue(new RunCommand(() -> robotDrive.setX()));
     driverControllerCommand.start().onTrue(new InstantCommand(() -> robotDrive.zeroHeading(), robotDrive));
 
-    new Trigger(vision::isAtShortDistance)
-    .onTrue(new InstantCommand(() -> LedSubsystem.blinkYellowFast()))
-    .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
-    new Trigger(vision::isAtLongDistance)
-    .onTrue(new InstantCommand(() -> LedSubsystem.blinkPurpleFast()))
-    .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
+    // new Trigger(vision::isAtShortDistance)
+    // .onTrue(new InstantCommand(() -> LedSubsystem.blinkYellowFast()))
+    // .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
+    // new Trigger(vision::isAtLongDistance)
+    // .onTrue(new InstantCommand(() -> LedSubsystem.blinkPurpleFast()))
+    // .onFalse(new InstantCommand(() -> LedSubsystem.blinkAllianceSolidFast()));
+
+    new Trigger(() -> {
+      double time = getTimeToNextShift();
+      return time >= 0 && time <= 5;
+    }).whileTrue(new InstantCommand(() -> LedSubsystem.blinkPurpleFast()));
 
     // -------------------------------- CoPilot Controller Binding ----------------------------------- //
     coPilotControllerCommand.leftTrigger().whileTrue(new OscillatedPulseAndIntakeCommand(intake));
-    coPilotControllerCommand.leftBumper().whileTrue( new UnjamHopperCommand(shooter, intake));
+    coPilotControllerCommand.leftBumper().whileTrue( new UnjamHopperCommand(shooter, intake, true));
     // coPilotControllerCommand.leftBumper().whileTrue( new PulseAndIntakeCommand(intake));
     
 
     coPilotControllerCommand.rightBumper().whileTrue(
       new AgitatedPulseAndShootCommand(shooter, intake, 2700, true, hood, false));
     coPilotControllerCommand.rightTrigger().whileTrue(
-      new AgitatedPulseAndShootCommand(shooter, intake, 3000, true, hood, true));
+      new AgitatedPulseAndShootCommand(shooter, intake, 3100, true, hood, true));
 
 
     coPilotControllerCommand.povUp().onTrue(new InstantCommand(() -> winch.setWinchPos(5.25))); // 3.25
@@ -138,13 +161,16 @@ public class RobotContainer {
 
     // coPilotControllerCommand.start().whilteTrue(new PulseAndShootCommand(shooter, intake, 2700, hood, false));
 
-    coPilotControllerCommand.x().whileTrue(new PulseAndIntakeCommand(intake));
-    coPilotControllerCommand.a().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
+    // coPilotControllerCommand.start().onTrue(new InstantCommand(() -> intake.setIntakePosition(100)));
+    coPilotControllerCommand.a().whileTrue(new IntakeAndShootCommand(intake, shooter, hood));
+    coPilotControllerCommand.b().whileTrue(new IntakeAndShootFarCommand(intake, shooter, hood));
+    coPilotControllerCommand.x().onTrue(new InstantCommand(() -> intake.setIntakePosition(10)));
     // coPilotControllerCommand.x().onTrue(new InstantCommand(() -> winch.decremPos()));
     // coPilotControllerCommand.b().onTrue(new InstantCommand(() -> winch.incremPos()));
-    coPilotControllerCommand.b().whileTrue(new PulseAndShootCommand(shooter, intake, 3000, hood, true));
+    // coPilotControllerCommand.b().whileTrue(new PulseAndShootCommand(shooter, intake, 3000, hood, true));
 
     coPilotControllerCommand.y().whileTrue(new PulseAndShootCommand(shooter, intake, 2700, hood, false));
+    coPilotControllerCommand.start().whileTrue(new RunCommand(() -> intake.setIntakeRoller(0.55)));
     // coPilotControllerCommand.y().onTrue(new InstantCommand(() -> hood.setHoodPosition(3.4)));
     // // coPilotControllerCommand.a().whileTrue(new ShootCommand(shooter, intake, 2850, false));
     // // coPilotControllerCommand.b().whileTrue(new ShootCommand(shooter, intake, 2775, false));
@@ -188,6 +214,9 @@ public class RobotContainer {
     else if (autoPosition.getSelected() == AutoPos.RightT_NZ) {
       robotDrive.setFieldRelativeOffset(90);
     }
+    else if (autoPosition.getSelected() == AutoPos.Center_Flipped) {
+      robotDrive.setFieldRelativeOffset(180);
+    }
     else {
       robotDrive.setFieldRelativeOffset(0);
     }
@@ -196,7 +225,13 @@ public class RobotContainer {
 
 
   public enum AutoPos{
-    LeftT_NZ, Center, RightT_NZ
+    LeftT_NZ, Center, Center_Flipped, RightT_NZ
+  }
+
+  public double getTimeToNextShift(){
+    return HubTracker.timeRemainingInCurrentShift()
+      .map(time -> time.in(Seconds))
+      .orElse(-1.0);
   }
 
 }

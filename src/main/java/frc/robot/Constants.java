@@ -170,9 +170,12 @@ public final class Constants {
 
         public static final double kickerKickSpeed = 0.65;
 
+        public static final double kickerKickSpeedRPM = 3550;
+
         public static final double kShooterSpeedDeadband = 300;
 
         public static final double kTestShooterVelocityRPM = 1000;
+        public static final double kShooterPassVelocityRPM = 3000;
     }
 
     public static final class IntakeConstants {
@@ -200,7 +203,7 @@ public final class Constants {
         public static final int kWinchCANID = 15;
         public static final int kWinchFollowerCANID = 16;
 
-        public static final double kWinchGearReduction = 75;
+        public static final double kWinchGearReduction = 75; // 48
 
         public static final double kWinchPositionDeadband = 0.1;
 

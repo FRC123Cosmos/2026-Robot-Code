@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CenterL_Depot(Direct)"
+                  "pathName": "RightT_Start_(NZ)"
                 }
               },
               {
@@ -37,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 3.25
+                              "waitTime": 2.71
                             }
                           }
                         ]
@@ -52,61 +52,23 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterL_Shoot2"
+            "pathName": "RightT_Return-Close(NZ)"
           }
         },
         {
           "type": "race",
           "data": {
             "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 4.0
-                }
-              },
               {
                 "type": "named",
                 "data": {
                   "name": "AgitatedShootClose"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
+              },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "UnjamHopper"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.24
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AgitatedShootClose"
+                  "waitTime": 7.0
                 }
               }
             ]
@@ -115,7 +77,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterL_Hang-RED(Direct)"
+            "pathName": "Right_Hang-Close"
           }
         },
         {

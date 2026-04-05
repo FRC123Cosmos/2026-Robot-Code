@@ -3,36 +3,42 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.HoodSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LedSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class OscillatedPulseAndIntakeCommand extends Command{
-    
-    private IntakeSubsystem intakeSubsystem;
+public class IntakeAndShootFarCommand extends Command{
+        private IntakeSubsystem intakeSubsystem;
+    private ShooterSubsystem shooterSubsystem;
+    private HoodSubsystem hoodSubsystem;
 
-    private final double pulseDutyCycle = 0.5;
-    private final double pulseDuration = 0.4;
-    private final double restDuration = 0.15;
+    private final double pulseDutyCycle = 0.55;
+    private final double pulseDuration = 0.45;
+    private final double restDuration = 0.125;
 
     private final Timer timer = new Timer();
 
     private boolean isPulsing = true;
     private double lastSpeed = Double.NaN;
 
-    private final double highPos = 50;
-    private final double lowPos = 150;
+    private final double highPos = 60;
+    private final double lowPos = 140;
 
     private boolean goingHigh = true;
     private boolean wasAtTargetPos = false;
 
-    public OscillatedPulseAndIntakeCommand(IntakeSubsystem intakeSubsystem) {
+    public IntakeAndShootFarCommand(IntakeSubsystem intakeSubsystem, ShooterSubsystem shooterSubsystem, HoodSubsystem hoodSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
-        addRequirements(intakeSubsystem);
+        this.shooterSubsystem = shooterSubsystem;
+        this.hoodSubsystem = hoodSubsystem;
+        addRequirements(intakeSubsystem, shooterSubsystem, hoodSubsystem);
     }
 
     @Override
     public void initialize() {
-        LedSubsystem.breathAllianceSolid();
+        LedSubsystem.blinkPurpleFast();
         timer.reset();
         timer.start();
 
@@ -42,13 +48,16 @@ public class OscillatedPulseAndIntakeCommand extends Command{
 
         isPulsing = true;
         intakeSubsystem.setIndexer(pulseDutyCycle);
+        shooterSubsystem.setShooterVelocity(3500);
+
+        hoodSubsystem.setHoodPosition(2.9);
     }
 
     @Override
     public void execute() {
 
         boolean atTargetPos = Math.abs(
-            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 50;
+            (intakeSubsystem.getIntakePos()) - intakeSubsystem.getTargetPosition()) < 40;
 
         if (atTargetPos && !wasAtTargetPos) {
             goingHigh = !goingHigh;
@@ -62,6 +71,7 @@ public class OscillatedPulseAndIntakeCommand extends Command{
 
         wasAtTargetPos = atTargetPos;
 
+        shooterSubsystem.kickFuelRPM(true);
 
         intakeSubsystem.setIntakeRoller(IntakeConstants.intakeSpeed);
 
@@ -91,9 +101,11 @@ public class OscillatedPulseAndIntakeCommand extends Command{
         LedSubsystem.setAllianceSolid();
         timer.stop();
 
+        shooterSubsystem.stopShooterSystem();
+
         intakeSubsystem.setIntakePosition(25);
 
-        intakeSubsystem.setIntakeRoller(0.60);
+        intakeSubsystem.setIntakeRoller(0.0);
         intakeSubsystem.setIndexer(0.0);
     }
 

@@ -21,7 +21,8 @@ public class ShooterSubsystem extends SubsystemBase{
     private final SparkClosedLoopController kShooterController;
     private final SparkClosedLoopController kKickerController;
 
-    private double targetSetpoint = 0;;
+    private double targetSetpoint = 0;
+    private double kickerTargetSetpoint = 0;
 
     public ShooterSubsystem(){
         kShooterMax = new SparkMax(ShooterConstants.kShooterCANID, MotorType.kBrushless);
@@ -47,8 +48,13 @@ public class ShooterSubsystem extends SubsystemBase{
         targetSetpoint = velocityRPM;
     }
 
+    public void setKickerRPM(double velocityRPM){
+        kickerTargetSetpoint = velocityRPM;
+    }
+
     public void stopKicker(){
-        kKickerController.setSetpoint(0, ControlType.kDutyCycle);
+        // kKickerController.setSetpoint(0, ControlType.kDutyCycle);
+        kickerTargetSetpoint = 0;
     }
 
 
@@ -61,19 +67,34 @@ public class ShooterSubsystem extends SubsystemBase{
         targetSetpoint = 0;
     }
 
-    public void kickFuel(boolean checkForSpeed) {
+    // public void kickFuel(boolean checkForSpeed) {
+    //     if(targetSetpoint > 0 && checkForSpeed) {
+    //         if(atSpeed()) {
+    //             setKickerRollers(ShooterConstants.kickerKickSpeed);
+    //         }
+    //     }
+    //     else {
+    //         setKickerRollers(ShooterConstants.kickerKickSpeed);
+    //     }
+    // }
+
+    public void kickFuelRPM(boolean checkForSpeed) {
         if(targetSetpoint > 0 && checkForSpeed) {
             if(atSpeed()) {
-                setKickerRollers(ShooterConstants.kickerKickSpeed);
+                kickerTargetSetpoint = ShooterConstants.kickerKickSpeedRPM;
             }
         }
         else {
-            setKickerRollers(ShooterConstants.kickerKickSpeed);
+            setKickerRollers(ShooterConstants.kickerKickSpeedRPM);
         }
     }
 
+
     @Override
     public void periodic() {
+        // SmartDashboard.putNumber("Kicker RPM", kKickerMax.getEncoder().getVelocity());
+        kKickerController.setSetpoint(kickerTargetSetpoint, ControlType.kVelocity);
+
         // SmartDashboard.putNumber("Shooter Target Velocity", targetSetpoint);
         // SmartDashboard.putNumber("Shooter VelocityRPM", kShooterMax.getEncoder().getVelocity());
         kShooterController.setSetpoint(targetSetpoint, ControlType.kVelocity);

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1884743589743607,
-        "y": 7.221128205128204
+        "x": 3.0838205128205147,
+        "y": 7.0467051282051285
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6586111375315409,
-        "y": 6.528395139425877
+        "x": 1.4170213426397114,
+        "y": 6.460161474167165
       },
       "isLocked": false,
       "linkedName": "LeftT_Return(NZ)"
@@ -20,28 +20,28 @@
         "y": 4.709435897435898
       },
       "prevControl": {
-        "x": 1.0813354830332136,
-        "y": 4.958523828022146
+        "x": 1.1688936880178904,
+        "y": 5.047015014467083
       },
       "nextControl": {
-        "x": 1.0386645169667865,
-        "y": 4.46034796684965
+        "x": 0.9832510933380598,
+        "y": 4.471508166126164
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.06,
-        "y": 4.55
+        "x": 1.0434977180509848,
+        "y": 4.515625300625817
       },
       "prevControl": {
-        "x": 1.1263736311055823,
-        "y": 4.791028091918474
+        "x": 1.3538407204578495,
+        "y": 4.715041981116383
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Left_Hang"
+      "linkedName": "Left_Hang-RED"
     }
   ],
   "rotationTargets": [
@@ -90,7 +90,7 @@
   "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -64.59228189105144
+    "rotation": -59.5344550805402
   },
   "useDefaultConstraints": true
 }

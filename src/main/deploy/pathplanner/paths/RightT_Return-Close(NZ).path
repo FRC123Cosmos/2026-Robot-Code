@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.061348463950292,
-        "y": 2.066006620886635
+        "x": 6.04762689122042,
+        "y": 1.9114348949923183
       },
       "isLocked": false,
       "linkedName": "RightT_Start(NZ)"
@@ -20,12 +20,12 @@
         "y": 0.6628205128205127
       },
       "prevControl": {
-        "x": 6.534892043623797,
-        "y": 0.68630485144893
+        "x": 6.495404096554961,
+        "y": 0.6821920585980538
       },
       "nextControl": {
-        "x": 4.5276330579374,
-        "y": 0.6306080945230048
+        "x": 4.512974020343488,
+        "y": 0.6345971018846976
       },
       "isLocked": false,
       "linkedName": null
@@ -36,28 +36,28 @@
         "y": 0.6628205128205127
       },
       "prevControl": {
-        "x": 4.81441342670868,
-        "y": 0.6932574335709384
+        "x": 4.196809111598078,
+        "y": 0.5958870032817092
       },
       "nextControl": {
-        "x": 3.706092877453308,
-        "y": 0.6539624449737061
+        "x": 2.0244370532096108,
+        "y": 1.1995426915977814
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.0605641025641033,
-        "y": 0.7907307692307699
+        "x": 3.3977820512820527,
+        "y": 2.5000769230769233
       },
       "prevControl": {
-        "x": 3.7132103129004426,
-        "y": 0.7813554403611661
+        "x": 3.624672762865092,
+        "y": 2.3950978537471657
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RightT_Return(NZ)"
+      "linkedName": "RightT_Return-Close"
     }
   ],
   "rotationTargets": [
@@ -75,7 +75,7 @@
   "eventMarkers": [
     {
       "name": "RaiseWinch",
-      "waypointRelativePos": 2.69705093833784,
+      "waypointRelativePos": 2.1126005361930065,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -90,7 +90,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 61.2602047083119
+    "rotation": 49.57392125990078
   },
   "reversed": false,
   "folder": "Right",

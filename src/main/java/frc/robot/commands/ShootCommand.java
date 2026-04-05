@@ -32,7 +32,8 @@ public class ShootCommand extends Command{
         // shootSpeed = shooterSubsystem.inputShootVelocity;
 
         // intakeSubsystem.setIndexer(IntakeConstants.indexerSpeed);
-        shooterSubsystem.kickFuel(true);
+        // shooterSubsystem.kickFuel(true);
+        shooterSubsystem.kickFuelRPM(true);
         // intakeSubsystem.agitateFuel(true);
     }
 

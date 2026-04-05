@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CenterL_Depot(Direct)"
+                  "pathName": "LeftT_Start_(NZ)"
                 }
               },
               {
@@ -21,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.3
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -37,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 3.25
+                              "waitTime": 3.06
                             }
                           }
                         ]
@@ -52,70 +52,39 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterL_Shoot2"
+            "pathName": "LeftT_Return-Close(NZ)"
           }
         },
         {
           "type": "race",
           "data": {
             "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 4.0
-                }
-              },
               {
                 "type": "named",
                 "data": {
                   "name": "AgitatedShootClose"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
+              },
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "UnjamHopper"
+                  "waitTime": 7.0
                 }
               }
             ]
           }
         },
         {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "path",
                 "data": {
-                  "waitTime": 3.24
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AgitatedShootClose"
+                  "pathName": "CenterL_Hang-RED(Direct)"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CenterL_Hang-RED(Direct)"
           }
         },
         {

@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "CenterL_Depot(Direct)"
+                  "pathName": "CenterL_Depot-Flipped(Direct)"
                 }
               },
               {
@@ -21,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.3
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -37,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 3.25
+                              "waitTime": 2.26
                             }
                           }
                         ]
@@ -81,7 +81,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
+                  "waitTime": 0.45
                 }
               },
               {
@@ -100,7 +100,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.24
+                  "waitTime": 4.0
                 }
               },
               {

@@ -8,52 +8,52 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.036814116908419,
-        "y": 5.689985397194794
+        "x": 5.95691998633937,
+        "y": 6.182189997819548
       },
       "isLocked": false,
       "linkedName": "LeftT_Start(NZ)"
     },
     {
       "anchor": {
-        "x": 5.711794871794873,
-        "y": 7.337410256410257
+        "x": 5.93273076923077,
+        "y": 7.232756410256411
       },
       "prevControl": {
-        "x": 6.425455626208029,
-        "y": 7.095019867876667
+        "x": 6.562479040783534,
+        "y": 6.972484405271589
       },
       "nextControl": {
-        "x": 5.0710842947840975,
-        "y": 7.555023575818478
+        "x": 5.530467535775041,
+        "y": 7.399009916669454
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.04896153846154,
-        "y": 7.337410256410257
+        "x": 3.7582564102564113,
+        "y": 7.383923076923077
       },
       "prevControl": {
-        "x": 4.298149802482344,
-        "y": 7.317280450790282
+        "x": 4.114734403578213,
+        "y": 7.405360821573818
       },
       "nextControl": {
-        "x": 3.5670940955549493,
-        "y": 7.37633623873298
+        "x": 3.2776937337375416,
+        "y": 7.355023172466455
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.1884743589743607,
-        "y": 7.221128205128204
+        "x": 3.0838205128205147,
+        "y": 7.0467051282051285
       },
       "prevControl": {
-        "x": 4.150169763308201,
-        "y": 7.142635563745942
+        "x": 3.425143217243536,
+        "y": 7.2195702396760515
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,19 +63,19 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0,
-      "rotationDegrees": 174.0531369453569
+      "rotationDegrees": 180.0
     },
     {
       "waypointRelativePos": 2.0,
-      "rotationDegrees": 179.4694986833262
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "intakeIn",
-      "waypointRelativePos": 0.6,
+      "name": "RaiseWinch",
+      "waypointRelativePos": 2.2359249329758866,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -90,12 +90,12 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -64.59228189105144
+    "rotation": -59.5344550805402
   },
   "reversed": false,
   "folder": "Left",
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.5,
     "rotation": -90.0
   },
   "useDefaultConstraints": true

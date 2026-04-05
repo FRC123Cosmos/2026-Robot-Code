@@ -3,61 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.65,
-        "y": 3.14
+        "x": 3.5838333333333345,
+        "y": 4.186166666666668
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.01880158445046,
-        "y": 2.2942610398301415
-      },
-      "isLocked": false,
-      "linkedName": "CenterR_Start"
-    },
-    {
-      "anchor": {
-        "x": 1.6302948717948724,
-        "y": 2.197743589743591
-      },
-      "prevControl": {
-        "x": 2.046721713806965,
-        "y": 2.0179537962448353
-      },
-      "nextControl": {
-        "x": 1.2791535855106102,
-        "y": 2.3493467357965576
+        "x": 2.6142221344376115,
+        "y": 4.258428635084622
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.02,
-        "y": 2.964
+        "x": 0.7232948717948733,
+        "y": 5.337358974358974
       },
       "prevControl": {
-        "x": 0.9893088830426218,
-        "y": 2.7158910413953006
+        "x": 0.9624292187441954,
+        "y": 5.264456545667461
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Right_Hang"
+      "linkedName": "Depot_EndPoint"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -45.00000000000004
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.7,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 0.85,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 0.3,
+        "maxVelocity": 0.35,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 180.0,
         "nominalVoltage": 12.0,
@@ -65,11 +44,22 @@
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.625,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 1.7999999999999998,
+      "maxWaypointRelativePos": 2.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "RaiseWinch",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.1,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -84,13 +74,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 130.91438322002514
   },
   "reversed": false,
   "folder": "Center",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": 28.937374806090716
+    "velocity": 0.2,
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

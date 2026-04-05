@@ -5,9 +5,54 @@
     "data": {
       "commands": [
         {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CenterL_Depot-Flipped(Direct)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "race",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "OscillateIntake"
+                            }
+                          },
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 2.26
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "CenterR_Start"
+            "pathName": "CenterL_Shoot-FACED"
           }
         },
         {
@@ -23,7 +68,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShootClose"
+                  "name": "AgitatedShootClose"
                 }
               }
             ]
@@ -36,7 +81,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.5
+                  "waitTime": 0.4
                 }
               },
               {
@@ -55,13 +100,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.5
+                  "waitTime": 4.0
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "ShootClose"
+                  "name": "AgitatedShootClose"
                 }
               }
             ]
@@ -70,7 +115,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CenterR_Hang(Direct)"
+            "pathName": "CenterL_Hang-FACED"
           }
         },
         {

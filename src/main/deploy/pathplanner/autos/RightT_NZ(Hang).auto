@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "RightT_Turn(NZ)"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightT_Start(NZ)"
+                  "pathName": "RightT_Start_(NZ)"
                 }
               },
               {
@@ -27,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.0
+                        "waitTime": 1.3
                       }
                     },
                     {
@@ -43,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 3.0
+                              "waitTime": 2.71
                             }
                           }
                         ]
@@ -74,45 +68,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 3.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "UnjamHopper"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AgitatedShootFar"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 2.75
+                  "waitTime": 7.0
                 }
               }
             ]

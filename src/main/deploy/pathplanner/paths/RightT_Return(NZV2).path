@@ -25,7 +25,7 @@
       },
       "nextControl": {
         "x": 6.184463259283524,
-        "y": 0.4800416391143969
+        "y": 0.48004163911439696
       },
       "isLocked": false,
       "linkedName": null
@@ -99,7 +99,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "RaiseWinch",
+      "waypointRelativePos": 2.300268096514735,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 2.0,

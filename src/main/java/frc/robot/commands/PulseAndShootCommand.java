@@ -60,7 +60,8 @@ public class PulseAndShootCommand extends Command{
         double elapsedTime = timer.get();
         double speed;
 
-        shooterSubsystem.kickFuel(true);
+        // shooterSubsystem.kickFuel(true);
+        shooterSubsystem.kickFuelRPM(true);
         
         if (isPulsing && elapsedTime >= pulseDuration) {
             speed = 0.0;

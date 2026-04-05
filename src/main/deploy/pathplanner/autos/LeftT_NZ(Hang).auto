@@ -21,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 1.2
                       }
                     },
                     {
@@ -37,7 +37,7 @@
                           {
                             "type": "wait",
                             "data": {
-                              "waitTime": 3.06
+                              "waitTime": 2.51
                             }
                           }
                         ]
@@ -68,45 +68,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 4.0
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "UnjamHopper"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.25
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AgitatedShootFar"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
+                  "waitTime": 7.25
                 }
               }
             ]
